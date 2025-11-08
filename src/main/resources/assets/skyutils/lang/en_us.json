@@ -1,0 +1,23 @@
+{
+  "key.category.minecraft.skyutils": "SkyUtils",
+
+  "key.skyutils.openMenu": "Open Config",
+
+  "key.skyutils.toggleFullBright": "Toggle FullBright",
+
+  "skyutils.yacl.name": "SkyUtils",
+
+  "skyutils.yacl.title": "Utils",
+
+  "skyutils.yacl.options.fullBright.name": "FullBright",
+
+  "skyutils.yacl.options.fullBright.description": "FullBright is utility feature that increases visibility in the dark.",
+
+  "skyutils.yacl.options.gamma.name": "Gamma",
+
+  "skyutils.yacl.options.gamma.description": "The gamma value when FullBright is enabled",
+
+  "skyutils.yacl.options.default-Gamma.name": "Default Gamma",
+
+  "skyutils.yacl.options.default-Gamma.description": "The gamma value when FullBright is disabled"
+}
