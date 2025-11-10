@@ -7,6 +7,8 @@ Just a Simple Minecraft Utility Mod Created By NotNightSky
 
 ![GitHub License](https://img.shields.io/github/license/xmoderlive/SkyUtils) 
 ![GitHub Release](https://img.shields.io/github/v/release/xmoderlive/skyutils)
+![GitHub Downloads (all assets, all releases)](https://img.shields.io/github/downloads/xmoderlive/skyutils/total)
+
 
 
 
