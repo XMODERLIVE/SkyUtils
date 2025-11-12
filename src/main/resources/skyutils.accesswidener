@@ -1,0 +1,4 @@
+accessWidener v2 named
+
+# For accessing protected methods in Screen class
+accessible method net/minecraft/client/gui/screen/Screen addDrawableChild (Lnet/minecraft/client/gui/Element;)Lnet/minecraft/client/gui/Element;

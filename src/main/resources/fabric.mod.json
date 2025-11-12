@@ -5,7 +5,7 @@
 
   "name": "SkyUtils",
   "description": "An utility mod created by NotNightSky",
-  "authors": [],
+  "authors": ["NotNightSky"],
   "contact": {},
 
   "license": "GPL-3.0",
@@ -21,6 +21,8 @@
   "mixins": [
     "skyutils.mixins.json"
   ],
+
+  "accessWidener": "skyutils.accesswidener",
 
   "depends": {
     "fabricloader": ">=${loader_version}",

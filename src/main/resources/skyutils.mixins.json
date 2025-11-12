@@ -6,7 +6,8 @@
   "mixins": [
   ],
   "client": [
-    "DoubleSliderCallBackMixin"
+    "doubleSliderCallBackMixin",
+    "deathScreenMixin"
   ],
   "injectors": {
     "defaultRequire": 1

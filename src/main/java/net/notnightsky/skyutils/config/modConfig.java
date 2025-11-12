@@ -10,7 +10,7 @@ import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
-import net.notnightsky.skyutils.config.keyBindingHelper.keybinding;
+import net.notnightsky.skyutils.config.keyBindingHelper.toggleHandler;
 
 public class modConfig {
     private static final String LOCAL_NAMESPACE_PATH = "skyutils.yacl.";
@@ -48,7 +48,7 @@ public class modConfig {
                                 .option(Option.<Boolean>createBuilder()
                                         .name(Text.translatable(LOCAL_NAMESPACE_PATH + "options.fullBright.name"))
                                         .description(OptionDescription.of(Text.translatable(LOCAL_NAMESPACE_PATH + "options.fullBright.description")))
-                                        .binding(false, () -> modConfig.fullBright, keybinding::setFullbright)
+                                        .binding(false, () -> modConfig.fullBright, toggleHandler::setFullbright)
                                         .controller((Option<Boolean> opt) -> BooleanControllerBuilder.create(opt)
                                                 .coloured(true)
                                                 .yesNoFormatter())
