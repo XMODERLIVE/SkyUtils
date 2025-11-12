@@ -38,6 +38,9 @@ public class modConfig {
     @SerialEntry
     public static double decrement = 50.0;
 
+    @SerialEntry
+    public static boolean nodarkness  = true;
+
     public static Screen openConfigScreen(Screen parent) {
         return YetAnotherConfigLib.createBuilder()
                 .title(Text.translatable(LOCAL_NAMESPACE_PATH + "title"))
@@ -88,6 +91,12 @@ public class modConfig {
                                                 .range(10.0, 100.0)
                                                 .step(10.0)
                                                 .formatValue((Double val) -> Text.literal(val.intValue() + "%")))
+                                        .build())
+                                .option(Option.<Boolean>createBuilder()
+                                        .name(Text.translatable(LOCAL_NAMESPACE_PATH + "options.gamma.nodarkness"))
+                                        .description(OptionDescription.of(Text.translatable(LOCAL_NAMESPACE_PATH + "options.gamma.nodarkness.description")))
+                                        .binding(true, () -> modConfig.nodarkness, newVal -> modConfig.nodarkness = newVal)
+                                        .controller(BooleanControllerBuilder::create)
                                         .build())
                                 .build())
                         .build())

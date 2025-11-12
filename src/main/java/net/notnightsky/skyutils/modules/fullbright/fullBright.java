@@ -1,6 +1,8 @@
 package net.notnightsky.skyutils.modules.fullbright;
 
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.text.Text;
 import net.notnightsky.skyutils.config.modConfig;
 
@@ -48,6 +50,17 @@ public class fullBright {
                 }
             }
             modConfig.HANDLER.save();
+        }
+    }
+
+    public void noDarknessEffect(){
+        while (modConfig.nodarkness){
+            if (MinecraftClient.getInstance().player != null) {
+                StatusEffectInstance darknessEffect = MinecraftClient.getInstance().player.getStatusEffect(StatusEffects.DARKNESS);
+                if (darknessEffect != null) {
+                    MinecraftClient.getInstance().player.removeStatusEffect(StatusEffects.DARKNESS);
+                }
+            }
         }
     }
 }
