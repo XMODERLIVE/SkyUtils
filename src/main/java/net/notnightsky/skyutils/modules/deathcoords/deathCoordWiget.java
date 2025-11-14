@@ -1,4 +1,4 @@
-package net.notnightsky.skyutils.modules.deathcords;
+package net.notnightsky.skyutils.modules.deathcoords;
 
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.font.TextRenderer;

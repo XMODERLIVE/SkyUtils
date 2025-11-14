@@ -54,7 +54,7 @@ public class fullBright {
     }
 
     public void noDarknessEffect(){
-        while (modConfig.nodarkness){
+        if (modConfig.nodarkness){
             if (MinecraftClient.getInstance().player != null) {
                 StatusEffectInstance darknessEffect = MinecraftClient.getInstance().player.getStatusEffect(StatusEffects.DARKNESS);
                 if (darknessEffect != null) {

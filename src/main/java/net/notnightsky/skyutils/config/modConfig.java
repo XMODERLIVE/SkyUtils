@@ -41,6 +41,9 @@ public class modConfig {
     @SerialEntry
     public static boolean nodarkness  = true;
 
+    @SerialEntry
+    public static boolean hookDeathScreen = true;
+
     public static Screen openConfigScreen(Screen parent) {
         return YetAnotherConfigLib.createBuilder()
                 .title(Text.translatable(LOCAL_NAMESPACE_PATH + "title"))
@@ -96,6 +99,12 @@ public class modConfig {
                                         .name(Text.translatable(LOCAL_NAMESPACE_PATH + "options.gamma.nodarkness"))
                                         .description(OptionDescription.of(Text.translatable(LOCAL_NAMESPACE_PATH + "options.gamma.nodarkness.description")))
                                         .binding(true, () -> modConfig.nodarkness, newVal -> modConfig.nodarkness = newVal)
+                                        .controller(BooleanControllerBuilder::create)
+                                        .build())
+                                .option(Option.<Boolean>createBuilder()
+                                        .name(Text.translatable(LOCAL_NAMESPACE_PATH + "options.deathcoords.name"))
+                                        .description(OptionDescription.of(Text.translatable(LOCAL_NAMESPACE_PATH + "options.deathcoords.description")))
+                                        .binding(true, () -> modConfig.hookDeathScreen, newVal -> modConfig.hookDeathScreen = newVal)
                                         .controller(BooleanControllerBuilder::create)
                                         .build())
                                 .build())
