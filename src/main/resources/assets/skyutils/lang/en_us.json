@@ -9,6 +9,10 @@
 
   "key.skyutils.decrementFullBright": "Gamma Decrement",
 
+  "skyutils.yacl.options.deathcoords.name": "Death Coordinates",
+
+  "skyutils.yacl.options.deathcoords.description": "Gives You the Option to Copy Your Death Coordinates",
+
   "skyutils.yacl.name": "SkyUtils",
 
   "skyutils.yacl.title": "Utils",
@@ -16,6 +20,10 @@
   "skyutils.yacl.group.fullBright": "FullBright",
 
   "skyutils.yacl.options.fullBright.name": "FullBright",
+
+  "skyutils.yacl.options.gamma.nodarkness": "No Darkness Effect",
+
+  "skyutils.yacl.options.gamma.nodarkness.description": "Disables Darkness Potion Effect",
 
   "skyutils.yacl.options.fullBright.description": "FullBright is utility feature that increases visibility in the dark.",
 
