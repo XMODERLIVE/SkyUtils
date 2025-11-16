@@ -13,9 +13,15 @@
 
   "skyutils.yacl.options.deathcoords.description": "Gives You the Option to Copy Your Death Coordinates",
 
+  "skyutils.yacl.options.chatcoords.name": "Chat Coordinates",
+
+  "skyutils.yacl.options.chatcoords.description": "Gives You the Option to Copy Your Current Coordinates",
+
   "skyutils.yacl.name": "SkyUtils",
 
   "skyutils.yacl.title": "Utils",
+
+  "skyutils.yacl.group.coordsbased": "Coordinates",
 
   "skyutils.yacl.group.fullBright": "FullBright",
 

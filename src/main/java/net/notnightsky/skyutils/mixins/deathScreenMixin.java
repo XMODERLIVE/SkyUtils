@@ -2,7 +2,7 @@ package net.notnightsky.skyutils.mixins;
 
 import net.minecraft.client.gui.screen.DeathScreen;
 import net.notnightsky.skyutils.config.modConfig;
-import net.notnightsky.skyutils.modules.deathcoords.deathCoordWiget;
+import net.notnightsky.skyutils.modules.coords.deathCoords.deathCoordWiget;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;

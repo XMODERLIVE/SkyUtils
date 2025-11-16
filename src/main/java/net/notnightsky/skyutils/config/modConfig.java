@@ -44,12 +44,34 @@ public class modConfig {
     @SerialEntry
     public static boolean hookDeathScreen = true;
 
+    @SerialEntry
+    public static boolean hookChatScreen = true;
+
     public static Screen openConfigScreen(Screen parent) {
         return YetAnotherConfigLib.createBuilder()
                 .title(Text.translatable(LOCAL_NAMESPACE_PATH + "title"))
                 .category(ConfigCategory.createBuilder()
                         .name(Text.translatable(LOCAL_NAMESPACE_PATH + "name"))
                         .group(OptionGroup.createBuilder()
+                                .collapsed(true)
+                                .name(Text.translatable(LOCAL_NAMESPACE_PATH + "group.coordsbased"))
+                                .option(Option.<Boolean>createBuilder()
+                                        .name(Text.translatable(LOCAL_NAMESPACE_PATH + "options.deathcoords.name"))
+                                        .description(OptionDescription.of(Text.translatable(LOCAL_NAMESPACE_PATH + "options.deathcoords.description")))
+                                        .binding(true, () -> modConfig.hookDeathScreen, newVal -> modConfig.hookDeathScreen = newVal)
+                                        .controller((Option<Boolean> opt) -> BooleanControllerBuilder.create(opt)
+                                                .coloured(true))
+                                        .build())
+                                .option(Option.<Boolean>createBuilder()
+                                        .name(Text.translatable(LOCAL_NAMESPACE_PATH + "options.chatcoords.name"))
+                                        .description(OptionDescription.of(Text.translatable(LOCAL_NAMESPACE_PATH + "options.chatcoords.description")))
+                                        .binding(true, () -> modConfig.hookChatScreen, newVal -> modConfig.hookChatScreen = newVal)
+                                        .controller((Option<Boolean> opt) -> BooleanControllerBuilder.create(opt)
+                                                .coloured(true))
+                                        .build())
+                                .build())
+                        .group(OptionGroup.createBuilder()
+                                .collapsed(true)
                                 .name(Text.translatable( LOCAL_NAMESPACE_PATH + "group.fullBright"))
                                 .option(Option.<Boolean>createBuilder()
                                         .name(Text.translatable(LOCAL_NAMESPACE_PATH + "options.fullBright.name"))
@@ -101,13 +123,6 @@ public class modConfig {
                                                 .step(10.0)
                                                 .formatValue((Double val) -> Text.literal(val.intValue() + "%")))
                                         .build())
-                                .build())
-                        .option(Option.<Boolean>createBuilder()
-                                .name(Text.translatable(LOCAL_NAMESPACE_PATH + "options.deathcoords.name"))
-                                .description(OptionDescription.of(Text.translatable(LOCAL_NAMESPACE_PATH + "options.deathcoords.description")))
-                                .binding(true, () -> modConfig.hookDeathScreen, newVal -> modConfig.hookDeathScreen = newVal)
-                                .controller((Option<Boolean> opt) -> BooleanControllerBuilder.create(opt)
-                                        .coloured(true))
                                 .build())
                         .build())
                 .build().generateScreen(parent);

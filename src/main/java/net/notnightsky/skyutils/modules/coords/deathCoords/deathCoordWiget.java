@@ -1,9 +1,8 @@
-package net.notnightsky.skyutils.modules.deathcoords;
+package net.notnightsky.skyutils.modules.coords.deathCoords;
 
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.gui.DrawContext;
-import net.minecraft.client.gui.screen.narration.NarrationMessageBuilder;
 import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.text.Text;
 
@@ -31,10 +30,5 @@ public class deathCoordWiget extends ButtonWidget {
         int textX = this.getX() + (this.width - textRenderer.getWidth(this.getMessage())) / 2;
         int textY = this.getY() + (this.height - 8) / 2;
         context.drawTextWithShadow(textRenderer, this.getMessage(), textX, textY, textColor);
-    }
-
-    @Override
-    public void appendClickableNarrations(NarrationMessageBuilder builder) {
-        this.appendDefaultNarrations(builder);
     }
 }
