@@ -8,7 +8,10 @@
   "client": [
     "chatScreenMixin",
     "deathScreenMixin",
-    "doubleSliderCallBackMixin"
+    "doubleSliderCallBackMixin",
+    "HandledScreenAccessor",
+    "AbstractFurnaceScreenHandlerAccessor",
+    "furnaceScreenMixin"
   ],
   "injectors": {
     "defaultRequire": 1

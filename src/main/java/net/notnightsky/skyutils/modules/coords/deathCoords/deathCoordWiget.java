@@ -30,5 +30,6 @@ public class deathCoordWiget extends ButtonWidget {
         int textX = this.getX() + (this.width - textRenderer.getWidth(this.getMessage())) / 2;
         int textY = this.getY() + (this.height - 8) / 2;
         context.drawTextWithShadow(textRenderer, this.getMessage(), textX, textY, textColor);
+        setFocused(false);
     }
 }
