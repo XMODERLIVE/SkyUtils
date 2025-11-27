@@ -2,3 +2,8 @@ accessWidener v2 named
 
 # For accessing protected methods in Screen class
 accessible method net/minecraft/client/gui/screen/Screen addDrawableChild (Lnet/minecraft/client/gui/Element;)Lnet/minecraft/client/gui/Element;
+# For accessing propertyDelegate in AbstractFurnaceBlockEntity class
+accessible field net/minecraft/screen/AbstractFurnaceScreenHandler propertyDelegate Lnet/minecraft/screen/PropertyDelegate;
+# For accessing HandledScreen
+accessible field net/minecraft/client/gui/screen/ingame/HandledScreen x I
+accessible field net/minecraft/client/gui/screen/ingame/HandledScreen y I

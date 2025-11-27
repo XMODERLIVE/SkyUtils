@@ -4,6 +4,7 @@ import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.ingame.AbstractFurnaceScreen;
 import net.minecraft.screen.AbstractFurnaceScreenHandler;
 import net.minecraft.screen.PropertyDelegate;
+import net.notnightsky.skyutils.config.modConfig;
 import net.notnightsky.skyutils.modules.furnace.furnaceCalculations;
 import net.notnightsky.skyutils.modules.furnace.furnaceGui;
 import org.spongepowered.asm.mixin.Mixin;
@@ -16,25 +17,26 @@ public abstract class furnaceScreenMixin {
 
     @Inject(method = "drawBackground", at = @At("TAIL"))
     private void onDrawBackground(DrawContext context, float deltaTicks, int mouseX, int mouseY, CallbackInfo ci) {
+        if (modConfig.furnaceToolTip){
+            AbstractFurnaceScreen<?> screen = (AbstractFurnaceScreen<?>) (Object) this;
+            AbstractFurnaceScreenHandler handler = screen.getScreenHandler();
 
-        AbstractFurnaceScreen<?> screen = (AbstractFurnaceScreen<?>) (Object) this;
-        AbstractFurnaceScreenHandler handler = screen.getScreenHandler();
+            PropertyDelegate props = handler.propertyDelegate;
 
-        PropertyDelegate props = ((AbstractFurnaceScreenHandlerAccessor) handler).getPropertyDelegate();
+            int fuelRemaining = props.get(0);
+            int fuelTime = props.get(1);
+            int cookElapsed = props.get(2);
+            int cookTime = props.get(3);
 
-        int fr = props.get(0);
-        int ft = props.get(1);
-        int ce = props.get(2);
-        int ct = props.get(3);
+            int totalItemsToSmelt = 0;
 
-        int totalItemsToSmelt = 0;
+            if (handler.getSlot(0) != null && !handler.getSlot(0).getStack().isEmpty()) {
+                totalItemsToSmelt = handler.getSlot(0).getStack().getCount();
+            }
 
-        if (handler.getSlot(0) != null && !handler.getSlot(0).getStack().isEmpty()) {
-            totalItemsToSmelt = handler.getSlot(0).getStack().getCount();
+            furnaceCalculations.FurnaceInfo info = furnaceCalculations.fromProperties(fuelRemaining, fuelTime, cookElapsed, cookTime, totalItemsToSmelt, 0);
+
+            furnaceGui.renderTooltipIfHovered(context, screen, info, mouseX, mouseY);
         }
-
-        furnaceCalculations.FurnaceInfo info = furnaceCalculations.fromProperties(fr, ft, ce, ct, totalItemsToSmelt, 0);
-
-        furnaceGui.renderTooltipIfHovered(context, screen, info, mouseX, mouseY);
     }
 }

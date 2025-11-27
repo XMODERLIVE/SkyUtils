@@ -66,17 +66,17 @@ public class furnaceCalculations {
         }
     }
 
-    public static FurnaceInfo fromProperties(int fr, int ft, int ce, int ct, int totalItems, int itemsSmelted) {
+    public static FurnaceInfo fromProperties(int fuelRemaining, int fuelTime, int cookElapsed, int cookTime, int totalItems, int itemsSmelted) {
 
         int totalTimeForAllItems = 0;
-        if (ct > 0 && totalItems > 0) {
+        if (cookTime > 0 && totalItems > 0) {
 
-            totalTimeForAllItems = ct * totalItems;
+            totalTimeForAllItems = cookTime * totalItems;
         } else if (totalItems > 0) {
 
             totalTimeForAllItems = totalItems * 200;
         }
 
-        return new FurnaceInfo(fr, ft, ce, ct, totalItems, itemsSmelted, totalTimeForAllItems);
+        return new FurnaceInfo(fuelRemaining, fuelTime, cookElapsed, cookTime, totalItems, itemsSmelted, totalTimeForAllItems);
     }
 }

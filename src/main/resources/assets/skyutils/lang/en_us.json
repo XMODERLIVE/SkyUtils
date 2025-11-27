@@ -23,13 +23,19 @@
 
   "skyutils.yacl.group.coordsbased": "Coordinates",
 
+  "skyutils.yacl.group.tooltip": "ToolTips & More",
+
   "skyutils.yacl.group.fullBright": "FullBright",
+
+  "skyutils.yacl.options.tooltip.furnace.name": "Furnace Info",
 
   "skyutils.yacl.options.fullBright.name": "FullBright",
 
   "skyutils.yacl.options.gamma.nodarkness": "No Darkness Effect",
 
   "skyutils.yacl.options.gamma.nodarkness.description": "Disables Darkness Potion Effect",
+
+  "skyutils.yacl.options.tooltip.furnace.description": "Furnace info allows you to know informations such as cook time remaining, current fuel status and more",
 
   "skyutils.yacl.options.fullBright.description": "FullBright is utility feature that increases visibility in the dark.",
 

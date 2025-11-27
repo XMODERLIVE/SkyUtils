@@ -9,8 +9,6 @@
     "chatScreenMixin",
     "deathScreenMixin",
     "doubleSliderCallBackMixin",
-    "HandledScreenAccessor",
-    "AbstractFurnaceScreenHandlerAccessor",
     "furnaceScreenMixin"
   ],
   "injectors": {

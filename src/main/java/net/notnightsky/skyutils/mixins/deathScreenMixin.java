@@ -14,12 +14,7 @@ public abstract class deathScreenMixin {
     private void addDeathCoordButton(CallbackInfo ci) {
         if (modConfig.hookDeathScreen){
             DeathScreen screen = (DeathScreen)(Object)this;
-            int buttonWidth = 120;
-            int buttonHeight = 20;
-            int screenWidth = screen.width;
-            int centeredX = (screenWidth - buttonWidth) / 2;
-
-            deathCoordWiget deathCordButton = new deathCoordWiget(centeredX, 180, buttonWidth, buttonHeight);
+            deathCoordWiget deathCordButton = new deathCoordWiget(screen.width / 2 - 59, screen.height / 4 + 48, 120, 20);
             screen.addDrawableChild(deathCordButton);
         }
     }

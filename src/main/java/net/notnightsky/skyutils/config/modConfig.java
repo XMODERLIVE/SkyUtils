@@ -47,6 +47,9 @@ public class modConfig {
     @SerialEntry
     public static boolean hookChatScreen = true;
 
+    @SerialEntry
+    public static boolean furnaceToolTip = true;
+
     public static Screen openConfigScreen(Screen parent) {
         return YetAnotherConfigLib.createBuilder()
                 .title(Text.translatable(LOCAL_NAMESPACE_PATH + "title"))
@@ -66,6 +69,17 @@ public class modConfig {
                                         .name(Text.translatable(LOCAL_NAMESPACE_PATH + "options.chatcoords.name"))
                                         .description(OptionDescription.of(Text.translatable(LOCAL_NAMESPACE_PATH + "options.chatcoords.description")))
                                         .binding(true, () -> modConfig.hookChatScreen, newVal -> modConfig.hookChatScreen = newVal)
+                                        .controller((Option<Boolean> opt) -> BooleanControllerBuilder.create(opt)
+                                                .coloured(true))
+                                        .build())
+                                .build())
+                        .group(OptionGroup.createBuilder()
+                                .collapsed(true)
+                                .name(Text.translatable(LOCAL_NAMESPACE_PATH + "group.tooltip"))
+                                .option(Option.<Boolean>createBuilder()
+                                        .name(Text.translatable(LOCAL_NAMESPACE_PATH + "options.tooltip.furnace.name"))
+                                        .description(OptionDescription.of(Text.translatable(LOCAL_NAMESPACE_PATH + "options.tooltip.furnace.description")))
+                                        .binding(true, () -> modConfig.furnaceToolTip, newVal -> modConfig.furnaceToolTip = newVal)
                                         .controller((Option<Boolean> opt) -> BooleanControllerBuilder.create(opt)
                                                 .coloured(true))
                                         .build())

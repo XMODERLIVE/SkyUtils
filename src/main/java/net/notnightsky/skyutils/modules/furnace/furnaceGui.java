@@ -4,7 +4,6 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.ingame.AbstractFurnaceScreen;
 import net.minecraft.text.Text;
-import net.notnightsky.skyutils.mixins.HandledScreenAccessor;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,23 +14,9 @@ public class furnaceGui {
     private static final int PROGRESS_ARROW_WIDTH = 24;
     private static final int PROGRESS_ARROW_HEIGHT = 17;
 
-    public static void renderOverlay(
-            DrawContext ctx,
-            AbstractFurnaceScreen<?> screen,
-            furnaceCalculations.FurnaceInfo info
-    ) {
-    }
-
-    public static void renderTooltipIfHovered(
-            DrawContext ctx,
-            AbstractFurnaceScreen<?> screen,
-            furnaceCalculations.FurnaceInfo info,
-            int mouseX,
-            int mouseY
-    ) {
-        HandledScreenAccessor access = (HandledScreenAccessor) screen;
-        int screenX = access.getX();
-        int screenY = access.getY();
+    public static void renderTooltipIfHovered(DrawContext ctx, AbstractFurnaceScreen<?> screen, furnaceCalculations.FurnaceInfo info, int mouseX, int mouseY) {
+        int screenX = screen.x;
+        int screenY = screen.y;
 
         if (isMouseOverArea(mouseX, mouseY, screenX, screenY)) {
             List<Text> tooltip = createTooltip(info);

@@ -13,8 +13,9 @@
 
   "environment": "client",
   "entrypoints": {
-    "client": ["net.notnightsky.skyutils.client.SkyutilsClient"],
-    "main": ["net.notnightsky.skyutils.Skyutils"],
+    "client": [
+      "net.notnightsky.skyutils.SkyutilsClient"
+    ],
     "modmenu": ["net.notnightsky.skyutils.modmenu.modMenuIntegration"]
   },
 
