@@ -22,6 +22,10 @@ repositories {
         name 'Xander Maven'
         url 'https://maven.isxander.dev/releases'
     }
+    maven {
+        name = "meteor-maven"
+        url = "https://maven.meteordev.org/releases"
+    }
     // Repository for mixinextras
     maven { url "https://maven.terraformersmc.com/releases/" }
 }
@@ -34,7 +38,10 @@ dependencies {
 
     modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
     modImplementation("com.terraformersmc:modmenu:${project.modmenu_version}")
-    
+
+    implementation "meteordevelopment:discord-ipc:1.1"
+    implementation "com.google.code.gson:gson:2.8.9"
+
     // Add mixinextras for advanced mixin features
     include(implementation(annotationProcessor("io.github.llamalad7:mixinextras-fabric:0.5.0")))
     modImplementation "dev.isxander:yet-another-config-lib:${project.yacl_version}"

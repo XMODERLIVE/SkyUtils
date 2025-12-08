@@ -11,6 +11,7 @@ import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.notnightsky.skyutils.config.keyBindingHelper.toggleHandler;
+import net.notnightsky.skyutils.modules.discordRpc.IPCManager;
 
 public class modConfig {
     private static final String LOCAL_NAMESPACE_PATH = "skyutils.yacl.";
@@ -22,6 +23,9 @@ public class modConfig {
                     .setJson5(true)
                     .build())
             .build();
+
+    @SerialEntry
+    public static boolean IPCEnabled = true;
 
     @SerialEntry
     public static boolean fullBright = false;
@@ -138,7 +142,22 @@ public class modConfig {
                                                 .formatValue((Double val) -> Text.literal(val.intValue() + "%")))
                                         .build())
                                 .build())
+                        .group(OptionGroup.createBuilder()
+                                .collapsed(true)
+                                .name(Text.translatable(LOCAL_NAMESPACE_PATH + "group.ipc"))
+                                .option(Option.<Boolean>createBuilder()
+                                        .name(Text.translatable(LOCAL_NAMESPACE_PATH + "options.ipc.name"))
+                                        .description(OptionDescription.of(Text.translatable(LOCAL_NAMESPACE_PATH + "options.ipc.description")))
+                                        .binding(true, () -> modConfig.IPCEnabled, newVal -> modConfig.IPCEnabled = newVal)
+                                        .controller((Option<Boolean> opt) -> BooleanControllerBuilder.create(opt)
+                                                .coloured(true))
+                                        .build())
+                                .build())
                         .build())
+                .save(() -> {
+                    modConfig.HANDLER.save();
+                    IPCManager.reload();
+                })
                 .build().generateScreen(parent);
     }
 }
