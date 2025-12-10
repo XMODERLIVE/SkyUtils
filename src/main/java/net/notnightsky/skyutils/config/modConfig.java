@@ -28,6 +28,12 @@ public class modConfig {
     public static boolean IPCEnabled = true;
 
     @SerialEntry
+    public static boolean lowFire = false;
+
+    @SerialEntry
+    public static boolean lowShield = false;
+
+    @SerialEntry
     public static boolean fullBright = false;
 
     @SerialEntry
@@ -59,6 +65,24 @@ public class modConfig {
                 .title(Text.translatable(LOCAL_NAMESPACE_PATH + "title"))
                 .category(ConfigCategory.createBuilder()
                         .name(Text.translatable(LOCAL_NAMESPACE_PATH + "name"))
+                        .group(OptionGroup.createBuilder()
+                                .name(Text.translatable(LOCAL_NAMESPACE_PATH + "group.overlays"))
+                                .collapsed(true)
+                                .option(Option.<Boolean>createBuilder()
+                                        .name(Text.translatable(LOCAL_NAMESPACE_PATH + "options.lowfire.name"))
+                                        .description(OptionDescription.of(Text.translatable(LOCAL_NAMESPACE_PATH + "options.lowfire.description")))
+                                        .binding(true, () -> modConfig.lowFire, newVal -> modConfig.lowFire = newVal)
+                                        .controller((Option<Boolean> opt) -> BooleanControllerBuilder.create(opt)
+                                                .coloured(true))
+                                        .build())
+                                .option(Option.<Boolean>createBuilder()
+                                        .name(Text.translatable(LOCAL_NAMESPACE_PATH + "options.lowshield.name"))
+                                        .description(OptionDescription.of(Text.translatable(LOCAL_NAMESPACE_PATH + "options.lowshield.description")))
+                                        .binding(true, () -> modConfig.lowShield, newVal -> modConfig.lowShield = newVal)
+                                        .controller((Option<Boolean> opt) -> BooleanControllerBuilder.create(opt)
+                                                .coloured(true))
+                                        .build())
+                                .build())
                         .group(OptionGroup.createBuilder()
                                 .collapsed(true)
                                 .name(Text.translatable(LOCAL_NAMESPACE_PATH + "group.coordsbased"))

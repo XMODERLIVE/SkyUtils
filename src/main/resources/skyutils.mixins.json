@@ -3,18 +3,22 @@
   "minVersion": "0.8",
   "package": "net.notnightsky.skyutils.mixins",
   "compatibilityLevel": "JAVA_21",
-  "mixins": [
-  ],
   "client": [
     "chatScreenMixin",
     "deathScreenMixin",
     "doubleSliderCallBackMixin",
-    "furnaceScreenMixin"
+    "furnaceScreenMixin",
+    "InGameOverlayRendererMixin",
+    "ShieldModelRendererMixin",
+    "WorldRendererMixin"
   ],
   "injectors": {
     "defaultRequire": 1
   },
   "overwrites": {
     "requireAnnotations": true
-  }
+  },
+  "mixins": [
+
+  ]
 }
