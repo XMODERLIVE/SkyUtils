@@ -2,6 +2,7 @@ package net.notnightsky.skyutils.config;
 
 import dev.isxander.yacl3.api.*;
 import dev.isxander.yacl3.api.controller.BooleanControllerBuilder;
+import dev.isxander.yacl3.api.controller.ColorControllerBuilder;
 import dev.isxander.yacl3.api.controller.DoubleSliderControllerBuilder;
 import dev.isxander.yacl3.config.v2.api.ConfigClassHandler;
 import dev.isxander.yacl3.config.v2.api.SerialEntry;
@@ -13,6 +14,8 @@ import net.minecraft.util.Identifier;
 import net.notnightsky.skyutils.config.keyBindingHelper.toggleHandler;
 import net.notnightsky.skyutils.modules.discordRpc.IPCManager;
 
+import java.awt.*;
+
 public class modConfig {
     private static final String LOCAL_NAMESPACE_PATH = "skyutils.yacl.";
 
@@ -23,6 +26,9 @@ public class modConfig {
                     .setJson5(true)
                     .build())
             .build();
+
+    @SerialEntry
+    public static Color outlinecolor = new Color(255, 255, 255,255);
 
     @SerialEntry
     public static boolean IPCEnabled = true;
@@ -66,20 +72,33 @@ public class modConfig {
                 .category(ConfigCategory.createBuilder()
                         .name(Text.translatable(LOCAL_NAMESPACE_PATH + "name"))
                         .group(OptionGroup.createBuilder()
+                                .collapsed(true)
+                                .name(Text.translatable(LOCAL_NAMESPACE_PATH + "group.world"))
+                                .option(Option.<Color>createBuilder()
+                                        .name(Text.translatable(LOCAL_NAMESPACE_PATH + "options.outlinecolor.name"))
+                                        .description(OptionDescription.of(Text.translatable(LOCAL_NAMESPACE_PATH + "options.outlinecolor.description")))
+                                        .binding(new Color(255, 255, 255, 255), () -> modConfig.outlinecolor, newVal -> modConfig.outlinecolor = newVal)
+                                        .controller(opt -> ColorControllerBuilder.create(opt)
+                                                .allowAlpha(true))
+                                        .build())
+                                .build())
+                        .group(OptionGroup.createBuilder()
                                 .name(Text.translatable(LOCAL_NAMESPACE_PATH + "group.overlays"))
                                 .collapsed(true)
                                 .option(Option.<Boolean>createBuilder()
                                         .name(Text.translatable(LOCAL_NAMESPACE_PATH + "options.lowfire.name"))
                                         .description(OptionDescription.of(Text.translatable(LOCAL_NAMESPACE_PATH + "options.lowfire.description")))
-                                        .binding(true, () -> modConfig.lowFire, newVal -> modConfig.lowFire = newVal)
+                                        .binding(false, () -> modConfig.lowFire, newVal -> modConfig.lowFire = newVal)
                                         .controller((Option<Boolean> opt) -> BooleanControllerBuilder.create(opt)
+                                                .trueFalseFormatter()
                                                 .coloured(true))
                                         .build())
                                 .option(Option.<Boolean>createBuilder()
                                         .name(Text.translatable(LOCAL_NAMESPACE_PATH + "options.lowshield.name"))
                                         .description(OptionDescription.of(Text.translatable(LOCAL_NAMESPACE_PATH + "options.lowshield.description")))
-                                        .binding(true, () -> modConfig.lowShield, newVal -> modConfig.lowShield = newVal)
+                                        .binding(false, () -> modConfig.lowShield, newVal -> modConfig.lowShield = newVal)
                                         .controller((Option<Boolean> opt) -> BooleanControllerBuilder.create(opt)
+                                                .trueFalseFormatter()
                                                 .coloured(true))
                                         .build())
                                 .build())
@@ -91,6 +110,7 @@ public class modConfig {
                                         .description(OptionDescription.of(Text.translatable(LOCAL_NAMESPACE_PATH + "options.deathcoords.description")))
                                         .binding(true, () -> modConfig.hookDeathScreen, newVal -> modConfig.hookDeathScreen = newVal)
                                         .controller((Option<Boolean> opt) -> BooleanControllerBuilder.create(opt)
+                                                .trueFalseFormatter()
                                                 .coloured(true))
                                         .build())
                                 .option(Option.<Boolean>createBuilder()
@@ -98,6 +118,7 @@ public class modConfig {
                                         .description(OptionDescription.of(Text.translatable(LOCAL_NAMESPACE_PATH + "options.chatcoords.description")))
                                         .binding(true, () -> modConfig.hookChatScreen, newVal -> modConfig.hookChatScreen = newVal)
                                         .controller((Option<Boolean> opt) -> BooleanControllerBuilder.create(opt)
+                                                .trueFalseFormatter()
                                                 .coloured(true))
                                         .build())
                                 .build())
@@ -109,6 +130,7 @@ public class modConfig {
                                         .description(OptionDescription.of(Text.translatable(LOCAL_NAMESPACE_PATH + "options.tooltip.furnace.description")))
                                         .binding(true, () -> modConfig.furnaceToolTip, newVal -> modConfig.furnaceToolTip = newVal)
                                         .controller((Option<Boolean> opt) -> BooleanControllerBuilder.create(opt)
+                                                .trueFalseFormatter()
                                                 .coloured(true))
                                         .build())
                                 .build())
@@ -120,6 +142,7 @@ public class modConfig {
                                         .description(OptionDescription.of(Text.translatable(LOCAL_NAMESPACE_PATH + "options.fullBright.description")))
                                         .binding(false, () -> modConfig.fullBright, toggleHandler::setFullbright)
                                         .controller((Option<Boolean> opt) -> BooleanControllerBuilder.create(opt)
+                                                .trueFalseFormatter()
                                                 .coloured(true))
                                         .build())
                                 .option(Option.<Boolean>createBuilder()
@@ -127,6 +150,7 @@ public class modConfig {
                                         .description(OptionDescription.of(Text.translatable(LOCAL_NAMESPACE_PATH + "options.gamma.nodarkness.description")))
                                         .binding(true, () -> modConfig.nodarkness, newVal -> modConfig.nodarkness = newVal)
                                         .controller((Option<Boolean> opt) -> BooleanControllerBuilder.create(opt)
+                                                .trueFalseFormatter()
                                                 .coloured(true))
                                         .build())
                                 .option(Option.<Double>createBuilder()
@@ -174,6 +198,7 @@ public class modConfig {
                                         .description(OptionDescription.of(Text.translatable(LOCAL_NAMESPACE_PATH + "options.ipc.description")))
                                         .binding(true, () -> modConfig.IPCEnabled, newVal -> modConfig.IPCEnabled = newVal)
                                         .controller((Option<Boolean> opt) -> BooleanControllerBuilder.create(opt)
+                                                .trueFalseFormatter()
                                                 .coloured(true))
                                         .build())
                                 .build())

@@ -6,8 +6,11 @@ import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.WorldRenderer;
 import net.minecraft.client.render.state.OutlineRenderState;
 import net.minecraft.client.util.math.MatrixStack;
+import net.notnightsky.skyutils.config.modConfig;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
+
+import java.awt.*;
 
 @Mixin(WorldRenderer.class)
 public abstract class WorldRendererMixin {
@@ -16,7 +19,7 @@ public abstract class WorldRendererMixin {
 
     @WrapOperation(method = "renderTargetBlockOutline", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/render/WorldRenderer;drawBlockOutline(Lnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumer;DDDLnet/minecraft/client/render/state/OutlineRenderState;I)V"))
     private void skyutils$outlineColor(WorldRenderer instance, MatrixStack matrices, VertexConsumer vertexConsumer, double x, double y, double z, OutlineRenderState state, int color, Operation<Void> original) {
-        int newI = 0xFF44AAFF;
+        int newI = modConfig.outlinecolor.getRGB();
         original.call(instance, matrices, vertexConsumer, x, y, z, state, newI);
     }
 }
