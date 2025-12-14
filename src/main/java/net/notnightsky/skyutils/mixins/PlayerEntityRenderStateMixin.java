@@ -1,25 +1,21 @@
 package net.notnightsky.skyutils.mixins;
 
 import net.notnightsky.skyutils.modules.playerhealthindicator.PlayerHealthInterface;
+import net.notnightsky.skyutils.modules.playerlatency.PlayerLatencyInterface;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 
 @Mixin(net.minecraft.client.render.entity.state.PlayerEntityRenderState.class)
-public class PlayerEntityRenderStateMixin implements PlayerHealthInterface {
+public class PlayerEntityRenderStateMixin implements PlayerHealthInterface, PlayerLatencyInterface {
     @Unique
-    private float skyutils$health;
+    private int skyutils$latency;
 
     @Unique
-    private float skyutils$maxHealth;
+    private float skyutils$health;
 
     @Override
     public float skyutils$getHealth() {
         return skyutils$health;
-    }
-
-    @Override
-    public float skyutils$getMaxHealth() {
-        return skyutils$maxHealth;
     }
 
     @Override
@@ -28,7 +24,12 @@ public class PlayerEntityRenderStateMixin implements PlayerHealthInterface {
     }
 
     @Override
-    public void skyutils$setMaxHealth(float maxHealth) {
-        this.skyutils$maxHealth = maxHealth;
+    public int skyutils$getLatency() {
+        return skyutils$latency;
+    }
+
+    @Override
+    public void skyutils$setLatency(int latency) {
+        skyutils$latency = latency;
     }
 }

@@ -7,3 +7,5 @@ accessible field net/minecraft/screen/AbstractFurnaceScreenHandler propertyDeleg
 # For accessing HandledScreen
 accessible field net/minecraft/client/gui/screen/ingame/HandledScreen x I
 accessible field net/minecraft/client/gui/screen/ingame/HandledScreen y I
+# For accessing Latency
+accessible field net/minecraft/client/network/PlayerListEntry latency I

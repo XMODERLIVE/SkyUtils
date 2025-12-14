@@ -11,6 +11,7 @@
     "InGameOverlayRendererMixin",
     "PlayerEntityRendererMixin",
     "PlayerEntityRenderStateMixin",
+    "PlayerListEntryMixin",
     "ShieldModelRendererMixin",
     "WorldRendererMixin"
   ],
