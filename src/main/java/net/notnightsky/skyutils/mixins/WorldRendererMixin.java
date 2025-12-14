@@ -15,8 +15,6 @@ import java.awt.*;
 @Mixin(WorldRenderer.class)
 public abstract class WorldRendererMixin {
 
-    //Fixme
-
     @WrapOperation(method = "renderTargetBlockOutline", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/render/WorldRenderer;drawBlockOutline(Lnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumer;DDDLnet/minecraft/client/render/state/OutlineRenderState;I)V"))
     private void skyutils$outlineColor(WorldRenderer instance, MatrixStack matrices, VertexConsumer vertexConsumer, double x, double y, double z, OutlineRenderState state, int color, Operation<Void> original) {
         int newI = modConfig.outlinecolor.getRGB();

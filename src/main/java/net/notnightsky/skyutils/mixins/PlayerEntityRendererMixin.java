@@ -1,0 +1,17 @@
+package net.notnightsky.skyutils.mixins;
+
+import net.minecraft.client.render.entity.PlayerEntityRenderer;
+import net.minecraft.text.Text;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.ModifyArg;
+
+@Mixin(PlayerEntityRenderer.class)
+public class PlayerEntityRendererMixin {
+    @ModifyArg(method = "renderLabelIfPresent(Lnet/minecraft/client/render/entity/state/PlayerEntityRenderState;Lnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/command/OrderedRenderCommandQueue;Lnet/minecraft/client/render/state/CameraRenderState;)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/render/command/OrderedRenderCommandQueue;submitLabel(Lnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/util/math/Vec3d;ILnet/minecraft/text/Text;ZIDLnet/minecraft/client/render/state/CameraRenderState;)V"), index = 3)
+    private Text renderLabel(Text playerName){
+
+
+        return playerName.copy().append("dwa");
+    }
+}
