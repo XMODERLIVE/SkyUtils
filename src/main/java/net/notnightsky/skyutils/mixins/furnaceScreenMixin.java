@@ -16,7 +16,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public abstract class furnaceScreenMixin {
 
     @Inject(method = "drawBackground", at = @At("TAIL"))
-    private void onDrawBackground(DrawContext context, float deltaTicks, int mouseX, int mouseY, CallbackInfo ci) {
+    private void skyutils$furnaceUtil(DrawContext context, float deltaTicks, int mouseX, int mouseY, CallbackInfo ci) {
         if (modConfig.furnaceToolTip){
             AbstractFurnaceScreen<?> screen = (AbstractFurnaceScreen<?>) (Object) this;
             AbstractFurnaceScreenHandler handler = screen.getScreenHandler();

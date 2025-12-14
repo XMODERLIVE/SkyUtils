@@ -15,7 +15,7 @@ import java.util.Optional;
 
 public class doubleSliderCallBackMixin {
     @Inject(method = "validate(Ljava/lang/Double;)Ljava/util/Optional;", at = @At("RETURN"), cancellable = true)
-    public void removeValidation(Double double_, CallbackInfoReturnable<Optional<Double>> cir) {
+    public void skyutils$removeBrightnessValidation(Double double_, CallbackInfoReturnable<Optional<Double>> cir) {
         cir.setReturnValue(double_ == null ? Optional.empty() : Optional.of(double_));
     }
 

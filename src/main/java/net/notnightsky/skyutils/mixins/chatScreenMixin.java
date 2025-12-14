@@ -11,7 +11,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(ChatScreen.class)
 public class chatScreenMixin {
     @Inject(method = "init", at = @At("TAIL"))
-    private void addButtons(CallbackInfo ci) {
+    private void skyutils$addButtons(CallbackInfo ci) {
         if (modConfig.hookChatScreen) {
             ChatScreen screen = (ChatScreen)(Object)this;
             int buttonWidth = 120;

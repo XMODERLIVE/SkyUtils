@@ -11,7 +11,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(DeathScreen.class)
 public abstract class deathScreenMixin {
     @Inject(method = "init", at = @At("TAIL"))
-    private void addDeathCoordButton(CallbackInfo ci) {
+    private void skyutils$addDeathCoordButton(CallbackInfo ci) {
         if (modConfig.hookDeathScreen){
             DeathScreen screen = (DeathScreen)(Object)this;
             deathCoordWiget deathCordButton = new deathCoordWiget(screen.width / 2 - 59, screen.height / 4 + 48, 120, 20);
