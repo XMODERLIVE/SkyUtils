@@ -28,6 +28,12 @@ public class modConfig {
             .build();
 
     @SerialEntry
+    public static boolean showHealth = false;
+
+    @SerialEntry
+    public static boolean showPing = false;
+
+    @SerialEntry
     public static Color outlinecolor = new Color(255, 255, 255,255);
 
     @SerialEntry
@@ -74,6 +80,22 @@ public class modConfig {
                         .group(OptionGroup.createBuilder()
                                 .collapsed(true)
                                 .name(Text.translatable(LOCAL_NAMESPACE_PATH + "group.world"))
+                                .option(Option.<Boolean>createBuilder()
+                                        .name(Text.translatable(LOCAL_NAMESPACE_PATH + "options.showping.name"))
+                                        .description(OptionDescription.of(Text.translatable(LOCAL_NAMESPACE_PATH + "options.showping.description")))
+                                        .binding(false, () -> modConfig.showPing, newVal -> modConfig.showPing = newVal)
+                                        .controller((Option<Boolean> opt) -> BooleanControllerBuilder.create(opt)
+                                                .trueFalseFormatter()
+                                                .coloured(true))
+                                        .build())
+                                .option(Option.<Boolean>createBuilder()
+                                        .name(Text.translatable(LOCAL_NAMESPACE_PATH + "options.showhealth.name"))
+                                        .description(OptionDescription.of(Text.translatable(LOCAL_NAMESPACE_PATH + "options.showhealth.description")))
+                                        .binding(false, () -> modConfig.showHealth, newVal -> modConfig.showHealth = newVal)
+                                        .controller((Option<Boolean> opt) -> BooleanControllerBuilder.create(opt)
+                                                .trueFalseFormatter()
+                                                .coloured(true))
+                                        .build())
                                 .option(Option.<Color>createBuilder()
                                         .name(Text.translatable(LOCAL_NAMESPACE_PATH + "options.outlinecolor.name"))
                                         .description(OptionDescription.of(Text.translatable(LOCAL_NAMESPACE_PATH + "options.outlinecolor.description")))

@@ -12,6 +12,7 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.PlayerLikeEntity;
 import net.minecraft.text.Text;
 import net.minecraft.util.math.Vec3d;
+import net.notnightsky.skyutils.config.modConfig;
 import net.notnightsky.skyutils.modules.playerhealthindicator.PlayerHealthInterface;
 import net.notnightsky.skyutils.modules.playerlatency.PlayerLatencyInterface;
 import org.spongepowered.asm.mixin.Mixin;
@@ -30,27 +31,42 @@ public class PlayerEntityRendererMixin {
 
         String color = pingColor(latency);
 
-        Text modified = text.copy().append(" §c[" + Math.round(health) + "❤] " + color + "[" + latency + "]");
+        Text modified;
+        if (modConfig.showHealth && !modConfig.showPing){
+            modified = text.copy().append(" §c[" + Math.round(health) + "❤] ");
+        } else if (modConfig.showPing && !modConfig.showHealth){
+            modified = text.copy().append(color + "[" + latency + "]");
+        } else if (modConfig.showPing && modConfig.showHealth) {
+            modified = text.copy().append(" §c[" + Math.round(health) + "❤] " + color + "[" + latency + "]");
+        } else {
+            modified = text.copy();
+        }
+
+//        Text modified = text.copy().append(" §c[" + Math.round(health) + "❤] " + color + "[" + latency + "]");
         original.call(queue, matrices, pos, light, modified, isSneaking, backgroundColor, squaredDistance, camera);
     }
 
 
     @Inject(method = "updateRenderState(Lnet/minecraft/entity/PlayerLikeEntity;Lnet/minecraft/client/render/entity/state/PlayerEntityRenderState;F)V", at = @At("TAIL"))
     private void skyutils$capHealth(PlayerLikeEntity entity, PlayerEntityRenderState state, float tickDelta, CallbackInfo ci) {
-        PlayerHealthInterface access = (PlayerHealthInterface) state;
+        if (modConfig.showHealth) {
+            PlayerHealthInterface access = (PlayerHealthInterface) state;
 
-        access.skyutils$setHealth(entity.getHealth());
+            access.skyutils$setHealth(entity.getHealth());
+        }
     }
 
 
-    @Inject(method = "updateRenderState", at = @At("TAIL"))
+    @Inject(method = "updateRenderState(Lnet/minecraft/entity/PlayerLikeEntity;Lnet/minecraft/client/render/entity/state/PlayerEntityRenderState;F)V", at = @At("TAIL"))
     private void skyutils$captureLatency(PlayerLikeEntity entity, PlayerEntityRenderState state, float tickDelta, CallbackInfo ci) {
-        PlayerLatencyInterface access = (PlayerLatencyInterface) state;
+        if (modConfig.showPing) {
+            PlayerLatencyInterface access = (PlayerLatencyInterface) state;
 
-        PlayerListEntry entry = MinecraftClient.getInstance().getNetworkHandler().getPlayerListEntry(entity.getUuid());
+            PlayerListEntry entry = MinecraftClient.getInstance().getNetworkHandler().getPlayerListEntry(entity.getUuid());
 
-        if (entry != null) {
-            access.skyutils$setLatency(entry.getLatency());
+            if (entry != null) {
+                access.skyutils$setLatency(entry.getLatency());
+            }
         }
     }
 }
