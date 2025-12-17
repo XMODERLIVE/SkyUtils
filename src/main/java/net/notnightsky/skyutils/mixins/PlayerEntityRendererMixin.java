@@ -34,15 +34,13 @@ public class PlayerEntityRendererMixin {
         Text modified;
         if (modConfig.showHealth && !modConfig.showPing){
             modified = text.copy().append(" §c[" + Math.round(health) + "❤] ");
-        } else if (modConfig.showPing && !modConfig.showHealth){
+        } else if (!modConfig.showHealth && modConfig.showPing){
             modified = text.copy().append(color + "[" + latency + "]");
         } else if (modConfig.showPing && modConfig.showHealth) {
             modified = text.copy().append(" §c[" + Math.round(health) + "❤] " + color + "[" + latency + "]");
         } else {
             modified = text.copy();
         }
-
-//        Text modified = text.copy().append(" §c[" + Math.round(health) + "❤] " + color + "[" + latency + "]");
         original.call(queue, matrices, pos, light, modified, isSneaking, backgroundColor, squaredDistance, camera);
     }
 
@@ -61,6 +59,10 @@ public class PlayerEntityRendererMixin {
     private void skyutils$captureLatency(PlayerLikeEntity entity, PlayerEntityRenderState state, float tickDelta, CallbackInfo ci) {
         if (modConfig.showPing) {
             PlayerLatencyInterface access = (PlayerLatencyInterface) state;
+
+            if(MinecraftClient.getInstance().getNetworkHandler() == null){
+                return;
+            }
 
             PlayerListEntry entry = MinecraftClient.getInstance().getNetworkHandler().getPlayerListEntry(entity.getUuid());
 

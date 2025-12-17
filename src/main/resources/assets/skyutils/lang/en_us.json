@@ -27,6 +27,12 @@
 
   "skyutils.yacl.group.fullBright": "FullBright",
 
+  "skyutils.yacl.group.ipc": "Discord",
+
+  "skyutils.yacl.group.overlays": "Overlays",
+
+  "skyutils.yacl.group.world": "World",
+
   "skyutils.yacl.options.tooltip.furnace.name": "Furnace Info",
 
   "skyutils.yacl.options.fullBright.name": "FullBright",
@@ -52,6 +58,34 @@
   "skyutils.yacl.options.gamma.increment.description": "The value gamma is increased by",
 
   "skyutils.yacl.options.gamma.decrement": "Decrement",
+
+  "skyutils.yacl.options.ipc.name": "Discord Activity",
+
+  "skyutils.yacl.options.ipc.description": "This option allows you to set a partially custom activity on discord",
+
+  "skyutils.yacl.options.ipcplaytext.name": "First Line",
+
+  "skyutils.yacl.options.ipcplaytext.description": "This option allows you to set a custom first line in the activity",
+
+  "skyutils.yacl.options.showhealth.name": "Player Health Tag",
+
+  "skyutils.yacl.options.showhealth.description": "This option allows you to see player health above their heads",
+
+  "skyutils.yacl.options.showping.name": "Player Latency Tag",
+
+  "skyutils.yacl.options.showping.description": "This option allows you to see the player's latency above their heads",
+
+  "skyutils.yacl.options.outlinecolor.name": "Target Block Outline Color",
+
+  "skyutils.yacl.options.outlinecolor.description": "This option allows you to set a custom color to the block outlines",
+
+  "skyutils.yacl.options.lowfire.name": "Low Fire",
+
+  "skyutils.yacl.options.lowfire.description": "This option allows you to lower the fire overlay",
+
+  "skyutils.yacl.options.lowshield.name": "Low Shield",
+
+  "skyutils.yacl.options.lowshield.description": "This option allows you to lower the shield model in hand",
 
   "skyutils.yacl.options.gamma.decrement.description": "The value gamma is decreased by"
 }

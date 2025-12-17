@@ -4,6 +4,7 @@ import dev.isxander.yacl3.api.*;
 import dev.isxander.yacl3.api.controller.BooleanControllerBuilder;
 import dev.isxander.yacl3.api.controller.ColorControllerBuilder;
 import dev.isxander.yacl3.api.controller.DoubleSliderControllerBuilder;
+import dev.isxander.yacl3.api.controller.StringControllerBuilder;
 import dev.isxander.yacl3.config.v2.api.ConfigClassHandler;
 import dev.isxander.yacl3.config.v2.api.SerialEntry;
 import dev.isxander.yacl3.config.v2.api.serializer.GsonConfigSerializerBuilder;
@@ -40,10 +41,16 @@ public class modConfig {
     public static boolean IPCEnabled = true;
 
     @SerialEntry
+    public static String IPCplayText = "Playing Minecraft Using SkyUtils!";
+
+    @SerialEntry
     public static boolean lowFire = false;
 
     @SerialEntry
     public static boolean lowShield = false;
+
+    @SerialEntry
+    public static boolean pumpkinOverlay = false;
 
     @SerialEntry
     public static boolean fullBright = false;
@@ -78,7 +85,6 @@ public class modConfig {
                 .category(ConfigCategory.createBuilder()
                         .name(Text.translatable(LOCAL_NAMESPACE_PATH + "name"))
                         .group(OptionGroup.createBuilder()
-                                .collapsed(true)
                                 .name(Text.translatable(LOCAL_NAMESPACE_PATH + "group.world"))
                                 .option(Option.<Boolean>createBuilder()
                                         .name(Text.translatable(LOCAL_NAMESPACE_PATH + "options.showping.name"))
@@ -103,10 +109,18 @@ public class modConfig {
                                         .controller(opt -> ColorControllerBuilder.create(opt)
                                                 .allowAlpha(true))
                                         .build())
+                                .collapsed(true)
                                 .build())
                         .group(OptionGroup.createBuilder()
                                 .name(Text.translatable(LOCAL_NAMESPACE_PATH + "group.overlays"))
-                                .collapsed(true)
+                                .option(Option.<Boolean>createBuilder()
+                                        .name(Text.translatable(LOCAL_NAMESPACE_PATH + "options.pumpkinoverlay.name"))
+                                        .description(OptionDescription.of(Text.translatable(LOCAL_NAMESPACE_PATH + "options.pumpkinoverlay.description")))
+                                        .binding(false, () -> modConfig.pumpkinOverlay, newVal -> modConfig.pumpkinOverlay = newVal)
+                                        .controller((Option<Boolean> opt) -> BooleanControllerBuilder.create(opt)
+                                                .trueFalseFormatter()
+                                                .coloured(true))
+                                        .build())
                                 .option(Option.<Boolean>createBuilder()
                                         .name(Text.translatable(LOCAL_NAMESPACE_PATH + "options.lowfire.name"))
                                         .description(OptionDescription.of(Text.translatable(LOCAL_NAMESPACE_PATH + "options.lowfire.description")))
@@ -123,9 +137,9 @@ public class modConfig {
                                                 .trueFalseFormatter()
                                                 .coloured(true))
                                         .build())
+                                .collapsed(true)
                                 .build())
                         .group(OptionGroup.createBuilder()
-                                .collapsed(true)
                                 .name(Text.translatable(LOCAL_NAMESPACE_PATH + "group.coordsbased"))
                                 .option(Option.<Boolean>createBuilder()
                                         .name(Text.translatable(LOCAL_NAMESPACE_PATH + "options.deathcoords.name"))
@@ -143,9 +157,9 @@ public class modConfig {
                                                 .trueFalseFormatter()
                                                 .coloured(true))
                                         .build())
+                                .collapsed(true)
                                 .build())
                         .group(OptionGroup.createBuilder()
-                                .collapsed(true)
                                 .name(Text.translatable(LOCAL_NAMESPACE_PATH + "group.tooltip"))
                                 .option(Option.<Boolean>createBuilder()
                                         .name(Text.translatable(LOCAL_NAMESPACE_PATH + "options.tooltip.furnace.name"))
@@ -155,9 +169,9 @@ public class modConfig {
                                                 .trueFalseFormatter()
                                                 .coloured(true))
                                         .build())
+                                .collapsed(true)
                                 .build())
                         .group(OptionGroup.createBuilder()
-                                .collapsed(true)
                                 .name(Text.translatable( LOCAL_NAMESPACE_PATH + "group.fullBright"))
                                 .option(Option.<Boolean>createBuilder()
                                         .name(Text.translatable(LOCAL_NAMESPACE_PATH + "options.fullBright.name"))
@@ -211,9 +225,9 @@ public class modConfig {
                                                 .step(10.0)
                                                 .formatValue((Double val) -> Text.literal(val.intValue() + "%")))
                                         .build())
+                                .collapsed(true)
                                 .build())
                         .group(OptionGroup.createBuilder()
-                                .collapsed(true)
                                 .name(Text.translatable(LOCAL_NAMESPACE_PATH + "group.ipc"))
                                 .option(Option.<Boolean>createBuilder()
                                         .name(Text.translatable(LOCAL_NAMESPACE_PATH + "options.ipc.name"))
@@ -223,6 +237,13 @@ public class modConfig {
                                                 .trueFalseFormatter()
                                                 .coloured(true))
                                         .build())
+                                .option(Option.<String>createBuilder()
+                                        .name(Text.translatable(LOCAL_NAMESPACE_PATH + "options.ipcplaytext.name"))
+                                        .description(OptionDescription.of(Text.translatable(LOCAL_NAMESPACE_PATH + "options.ipcplaytext.description")))
+                                        .binding("Playing Minecraft Using SkyUtils!", () -> modConfig.IPCplayText, newVal -> modConfig.IPCplayText = newVal)
+                                        .controller(StringControllerBuilder::create)
+                                        .build())
+                                .collapsed(true)
                                 .build())
                         .build())
                 .save(() -> {

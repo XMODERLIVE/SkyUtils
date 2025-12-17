@@ -12,7 +12,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class SkyutilsClient implements ClientModInitializer {
-    public static final Logger LOGGER = LoggerFactory.getLogger("fullbright");
+    public static final Logger LOGGER = LoggerFactory.getLogger("SkyUtils");
 
     @Override
     public void onInitializeClient() {
