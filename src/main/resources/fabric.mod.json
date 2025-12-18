@@ -6,7 +6,11 @@
   "name": "SkyUtils",
   "description": "An utility mod created by NotNightSky",
   "authors": ["NotNightSky"],
-  "contact": {},
+  "contact": {
+    "homepage": "https://modrinth.com/mod/skyutil",
+    "sources": "https://github.com/XMODERLIVE/skyutils",
+    "issues": "https://github.com/XMODERLIVE/skyutils/issues"
+  },
 
   "license": "GPL-3.0",
   "icon": "assets/skyutils/icon.png",
@@ -18,7 +22,11 @@
     ],
     "modmenu": ["net.notnightsky.skyutils.modmenu.modMenuIntegration"]
   },
-
+  "custom": {
+    "modmenu": {
+      "update_checker": true
+    }
+  },
   "mixins": [
     "skyutils.mixins.json"
   ],
