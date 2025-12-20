@@ -16,7 +16,7 @@ public abstract class InGameOverlayRendererMixin {
     @Inject(method = "renderFireOverlay", at = @At(value = "HEAD", target = "Lnet/minecraft/client/gui/hud/InGameOverlayRenderer;renderFireOverlay(Lnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumerProvider;Lnet/minecraft/client/texture/Sprite;)V"))
     private static void skyutils$lowFire(MatrixStack matrices, VertexConsumerProvider vertexConsumers, Sprite sprite, CallbackInfo ci) {
         if(modConfig.lowFire){
-            matrices.translate(0, -0.38, 0);
+            matrices.translate(0, modConfig.fireTranslate * -1, 0);
         }
     }
 }

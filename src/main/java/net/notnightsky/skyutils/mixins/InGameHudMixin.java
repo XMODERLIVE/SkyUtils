@@ -17,7 +17,7 @@ import org.spongepowered.asm.mixin.injection.At;
 public class InGameHudMixin {
     @WrapOperation(method = "renderMiscOverlays", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/hud/InGameHud;renderOverlay(Lnet/minecraft/client/gui/DrawContext;Lnet/minecraft/util/Identifier;F)V"))
     private void modifyIfPumpkin(InGameHud instance, DrawContext context, Identifier texture, float opacity, Operation<Void> original) {
-        float modifiedOpacity = 0;
+        float modifiedOpacity = (float) (modConfig.pumpkinOverlayOpacity / 100);
         PlayerEntity player = MinecraftClient.getInstance().player;
 
         if(player == null){

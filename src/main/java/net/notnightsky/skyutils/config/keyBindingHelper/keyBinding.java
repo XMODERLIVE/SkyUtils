@@ -19,7 +19,7 @@ public class keyBinding {
         openMenu = KeyBindingHelper.registerKeyBinding(new KeyBinding(
                 "key.skyutils.openMenu",
                 InputUtil.Type.KEYSYM,
-                GLFW.GLFW_KEY_B,
+                GLFW.GLFW_KEY_RIGHT_SHIFT,
                 skyutilsCategory
         ));
 

@@ -22,7 +22,6 @@ public class SkyutilsClient implements ClientModInitializer {
         keyBinding.registerKeybinds();
         toggleHandler.registerToggle();
         new modMenuIntegration();
-
         ClientTickEvents.END_CLIENT_TICK.register(client -> new fullBright().noDarknessEffect());
     }
 }
