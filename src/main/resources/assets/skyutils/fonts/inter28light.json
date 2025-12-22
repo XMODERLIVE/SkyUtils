@@ -1,0 +1,10 @@
+{
+  "providers": [
+    {
+      "type": "ttf",
+      "file": "skyutils:font/inter28light.ttf",
+      "size": 28,
+      "oversample": 2
+    }
+  ]
+}
