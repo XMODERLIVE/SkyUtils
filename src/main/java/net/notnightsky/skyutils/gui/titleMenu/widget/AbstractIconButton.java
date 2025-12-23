@@ -26,15 +26,15 @@ public class AbstractIconButton extends AbstractButton {
         // Lower alpha for icon button too
         int bgAlpha;
         if (isHovered()) {
-            bgAlpha = 80 + alpha; // More visible when hovered
+            bgAlpha = 60 + alpha; // More visible when hovered
         } else {
-            bgAlpha = 50 + alpha; // Very subtle when not hovered
+            bgAlpha = 40 + alpha; // Very subtle when not hovered
         }
 
         bgAlpha = Math.min(bgAlpha, 120); // Keep it transparent
 
         // Dark background with low alpha
-        int bgColor = (bgAlpha << 24) | 0x222222;
+        int bgColor = (bgAlpha << 24) | 0x303030;
 
         // Simple square button
         render2D.rect(ctx, getX(), getY(), width, height, bgColor);
