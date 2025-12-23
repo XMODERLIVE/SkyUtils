@@ -21,18 +21,18 @@ public class AbstractTextButton extends AbstractButton {
     protected void renderAni(DrawContext ctx, int mouseX, int mouseY, float delta) {
         int alpha = animValue();
 
-        // Much lower alpha values for subtlety
+        // Lower alpha for icon button too
         int bgAlpha;
         if (isHovered()) {
-            bgAlpha = 60 + alpha; // Slightly brighter when hovered
+            bgAlpha = 80 + alpha; // More visible when hovered
         } else {
-            bgAlpha = 40 + alpha; // Very subtle when not hovered
+            bgAlpha = 50 + alpha; // Very subtle when not hovered
         }
 
-        bgAlpha = Math.min(bgAlpha, 100); // Cap at 100 (quite transparent)
+        bgAlpha = Math.min(bgAlpha, 120);
 
         // Dark gray with low alpha
-        int bgColor = (bgAlpha << 24) | 0xCCCCCC; // Light gray color
+        int bgColor = (bgAlpha << 24) | 0x222222;
 
         // Simple rectangle
         render2D.rect(ctx, getX(), getY(), width, height, bgColor);

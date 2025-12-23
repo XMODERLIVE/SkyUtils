@@ -11,6 +11,8 @@ import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.notnightsky.skyutils.gui.titleMenu.widget.AbstractIconButton;
 import net.notnightsky.skyutils.gui.titleMenu.widget.AbstractTextButton;
+import net.notnightsky.skyutils.utils.font.FontRenderer;
+import net.notnightsky.skyutils.utils.font.fontSizes;
 
 public class screen extends Screen {
     private static final Identifier CROSS_ICON = Identifier.of("skyutils", "icon/cross.png");
@@ -88,6 +90,7 @@ public class screen extends Screen {
 
         // Render all widgets
         super.render(ctx, mouseX, mouseY, delta);
+        drawCopyright(ctx);
     }
 
     private void drawDebugGrid(DrawContext ctx) {
@@ -115,6 +118,10 @@ public class screen extends Screen {
                 centerX,
                 height / 2 - 45,
                 0xFFFFFFFF);
+    }
+    private void drawCopyright(DrawContext ctx) {
+        String copyright = "Copyright Mojang Studios. Do not distribute!";
+        FontRenderer.drawText(ctx, copyright,width - FontRenderer.getStringWidth(copyright, fontSizes.MEDIUM), height - 24,0x50ffffff, fontSizes.MEDIUM);
     }
 
     @Override
