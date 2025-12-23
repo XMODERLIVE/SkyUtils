@@ -72,7 +72,7 @@ public class screen extends Screen {
                 width - 28,
                 12,
                 20,
-                Identifier.of("minecraft", "textures/gui/icons.png"),
+                Identifier.of("skyutils", "icon/cross.png"),
                 () -> {
                     if (client != null) {
                         client.scheduleStop();
@@ -88,6 +88,17 @@ public class screen extends Screen {
 
         // Render all widgets
         super.render(ctx, mouseX, mouseY, delta);
+    }
+
+    private void drawDebugGrid(DrawContext ctx) {
+        // Draw vertical lines every 50px
+        for (int x = 0; x < width; x += 50) {
+            ctx.fill(x, 0, x + 1, height, 0x33FFFFFF);
+        }
+        // Draw horizontal lines every 50px
+        for (int y = 0; y < height; y += 50) {
+            ctx.fill(0, y, width, y + 1, 0x33FFFFFF);
+        }
     }
 
     private void drawHeader(DrawContext ctx) {

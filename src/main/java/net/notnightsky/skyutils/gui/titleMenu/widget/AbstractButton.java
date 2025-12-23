@@ -16,16 +16,16 @@ public abstract class AbstractButton extends ClickableWidget {
                 .setEase(Easing.LINEAR)
                 .setMin(0)
                 .setMax(25)
-                .setSpeed(200);
+                .setSpeed(3); // Changed from 200 to 5 (much slower)
     }
 
     @Override
     protected final void renderWidget(DrawContext ctx, int mouseX, int mouseY, float delta) {
         // Update animation based on hover state
         if (this.isHovered()) {
-            animate.getMax();
+            animate.toMax();
         } else {
-            animate.getMin();
+            animate.toMin();
         }
 
         animate.update();

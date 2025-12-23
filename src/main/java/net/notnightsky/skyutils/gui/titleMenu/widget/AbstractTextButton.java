@@ -1,6 +1,7 @@
 package net.notnightsky.skyutils.gui.titleMenu.widget;
 
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.gl.RenderPipelines;
 import net.minecraft.client.gui.Click;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.narration.NarrationMessageBuilder;
@@ -19,13 +20,25 @@ public class AbstractTextButton extends AbstractButton {
     @Override
     protected void renderAni(DrawContext ctx, int mouseX, int mouseY, float delta) {
         int alpha = animValue();
-        int bgColor = ((alpha + 30) << 24) | 0xFFFFFF; // Add some base alpha
 
-        // Draw rounded background
-        render2D.roundedRect(ctx, getX(), getY(), width, height, 4, bgColor);
+        // Much lower alpha values for subtlety
+        int bgAlpha;
+        if (isHovered()) {
+            bgAlpha = 60 + alpha; // Slightly brighter when hovered
+        } else {
+            bgAlpha = 40 + alpha; // Very subtle when not hovered
+        }
 
-        // Draw text - make sure it's visible
-        int textColor = 0xFFFFFFFF; // White with full alpha
+        bgAlpha = Math.min(bgAlpha, 100); // Cap at 100 (quite transparent)
+
+        // Dark gray with low alpha
+        int bgColor = (bgAlpha << 24) | 0xCCCCCC; // Light gray color
+
+        // Simple rectangle
+        render2D.rect(ctx, getX(), getY(), width, height, bgColor);
+
+        // Draw text with full opacity for readability
+        int textColor = 0xFFFFFFFF; // White text, full opacity
         ctx.drawCenteredTextWithShadow(client.textRenderer, getMessage(),
                 getX() + width / 2,
                 getY() + (height - client.textRenderer.fontHeight) / 2,
@@ -34,7 +47,6 @@ public class AbstractTextButton extends AbstractButton {
 
     @Override
     public void onClick(Click click, boolean doubled) {
-        // Only handle primary click (left mouse button)
         if (click.buttonInfo().button() == 0 && action != null) {
             action.run();
         }

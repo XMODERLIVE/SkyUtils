@@ -1,13 +1,13 @@
 package net.notnightsky.skyutils.utils.animation;
 
 public class Animate {
-
-    private static float value;
+    private float value;
     private float min;
     private float max;
     private float speed;
     private float time;
-    private boolean reversed;
+    private float target; // Added: target value to animate towards
+    private boolean animatingToMax; // Added: direction of animation
     private Easing ease;
 
     public Animate() {
@@ -16,34 +16,65 @@ public class Animate {
         this.min = 0;
         this.max = 1;
         this.speed = 50;
-        this.reversed = false;
+        this.time = 0;
+        this.target = min;
+        this.animatingToMax = false;
     }
 
-    public void reset() { time = min; }
+    public void reset() {
+        time = min;
+        value = min;
+        target = min;
+    }
 
     public Animate update() {
-        if (reversed) {
-            if (time > min) time -= (Delta.getDeltaTime() * .001F * speed);
-        } else {
-            if (time < max) time += (Delta.getDeltaTime() * .001F * speed);
+        // Determine which direction to animate
+        if (animatingToMax && time < max) {
+            time += (Delta.getDeltaTime() * 0.001F * speed);
+        } else if (!animatingToMax && time > min) {
+            time -= (Delta.getDeltaTime() * 0.001F * speed);
         }
+
         time = clamp(time, min, max);
-        float easeVal = getEase().ease(time, min, max, max);
+        float easeVal = ease.ease(time, min, max, max);
         this.value = Math.min(easeVal, max);
         return this;
     }
 
-    public Animate setValue(float value) {
-        this.value = value;
+    // NEW: Set the animation target
+    public Animate setTarget(float target) {
+        this.target = clamp(target, min, max);
+        this.animatingToMax = (target > time);
         return this;
     }
+
+    // NEW: Animate to max value
+    public Animate toMax() {
+        return setTarget(max);
+    }
+
+    // NEW: Animate to min value
+    public Animate toMin() {
+        return setTarget(min);
+    }
+
+    public Animate setValue(float value) {
+        this.value = clamp(value, min, max);
+        this.time = clamp(value, min, max); // Also update time for consistency
+        return this;
+    }
+
     public Animate setMin(float min) {
         this.min = min;
+        this.time = clamp(time, min, max);
+        this.value = clamp(value, min, max);
         return this;
     }
 
     public Animate setMax(float max) {
         this.max = max;
+        this.time = clamp(time, min, max);
+        this.value = clamp(value, min, max);
         return this;
     }
 
@@ -52,23 +83,23 @@ public class Animate {
         return this;
     }
 
-    public Animate setReversed(boolean reversed) {
-        this.reversed = reversed;
-        return this;
-    }
-
     public Animate setEase(Easing ease) {
         this.ease = ease;
         return this;
     }
 
-    public static float getValueInt() { return (int) value; }
-    public static float getValue() { return value; }
+    // REMOVED: setReversed() - we don't need this anymore
+
+    public float getValueInt() { return (int) value; } // Remove static modifier
+    public float getValue() { return value; }
     public float getMin() { return min; }
     public float getMax() { return max; }
     public float getSpeed() { return speed; }
-    public boolean isReversed() { return reversed; }
     public Easing getEase() { return ease; }
+    public float getTarget() { return target; } // Added
+    public boolean isAnimating() { return Math.abs(time - target) > 0.01f; } // Added
 
-    private float clamp(float num, float min, float max) { return num < min ? min : (Math.min(num, max)); }
+    private float clamp(float num, float min, float max) {
+        return num < min ? min : (Math.min(num, max));
+    }
 }
