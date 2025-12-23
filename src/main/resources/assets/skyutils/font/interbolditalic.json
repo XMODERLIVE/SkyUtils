@@ -1,0 +1,10 @@
+{
+  "providers": [
+    {
+      "type": "ttf",
+      "file": "skyutils:bolditalic.ttf",
+      "size": 18,
+      "oversample": 2
+    }
+  ]
+}
