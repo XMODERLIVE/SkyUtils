@@ -12,16 +12,11 @@ public abstract class AbstractButton extends ClickableWidget {
 
     protected AbstractButton(int x, int y, int width, int height, Text message) {
         super(x, y, width, height, message);
-        this.animate = new Animate()
-                .setEase(Easing.LINEAR)
-                .setMin(0)
-                .setMax(25)
-                .setSpeed(3); // Changed from 200 to 5 (much slower)
+        this.animate = new Animate().setEase(Easing.LINEAR).setMin(0).setMax(25).setSpeed(3);
     }
 
     @Override
     protected final void renderWidget(DrawContext ctx, int mouseX, int mouseY, float delta) {
-        // Update animation based on hover state
         if (this.isHovered()) {
             animate.toMax();
         } else {
@@ -32,21 +27,12 @@ public abstract class AbstractButton extends ClickableWidget {
         renderAni(ctx, mouseX, mouseY, delta);
     }
 
-    /**
-     * Value for hover animations etc.
-     */
     protected final int animValue() {
         return (int) animate.getValueInt();
     }
 
-    /**
-     * Draw visuals here ONLY
-     */
     protected abstract void renderAni(DrawContext ctx, int mouseX, int mouseY, float delta);
 
-    /**
-     * Override this method for click handling
-     */
     @Override
     public abstract void onClick(Click click, boolean doubled);
 }

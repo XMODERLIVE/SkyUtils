@@ -1,24 +1,18 @@
 package net.notnightsky.skyutils.gui.titleMenu;
 
-import com.mojang.blaze3d.opengl.GlStateManager;
-import com.terraformersmc.modmenu.api.ModMenuApi;
 import com.terraformersmc.modmenu.gui.ModsScreen;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.gl.RenderPipelines;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.screen.multiplayer.MultiplayerScreen;
 import net.minecraft.client.gui.screen.option.OptionsScreen;
 import net.minecraft.client.gui.screen.world.SelectWorldScreen;
 import net.minecraft.client.realms.gui.screen.RealmsMainScreen;
-import net.minecraft.client.realms.gui.screen.RealmsScreen;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.notnightsky.skyutils.SkyutilsClient;
 import net.notnightsky.skyutils.gui.titleMenu.widget.AbstractIconButton;
 import net.notnightsky.skyutils.gui.titleMenu.widget.AbstractTextButton;
 import net.notnightsky.skyutils.utils.font.FontRenderer;
-import net.notnightsky.skyutils.utils.font.fontSizes;
 
 public class screen extends Screen {
     private static final Identifier CROSS_ICON = Identifier.of("skyutils", "icon/cross.png");
@@ -79,7 +73,6 @@ public class screen extends Screen {
         // Semi-transparent dark background
         ctx.fill(0, 0, width, height, 0x88000000);
 
-        // Render all widgets
         super.render(ctx, mouseX, mouseY, delta);
         drawCopyright(ctx);
         drawVersion(ctx);

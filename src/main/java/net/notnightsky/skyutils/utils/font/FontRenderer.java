@@ -16,66 +16,21 @@ public class FontRenderer {
         return client.textRenderer.fontHeight;
     }
 
-    // === TEXT RENDERING METHODS ===
+    public static void drawText(DrawContext context, String text, int x, int y, int rgbColor) {
+        Text coloredText = Text.literal(text).setStyle(Style.EMPTY.withColor(TextColor.fromRgb(rgbColor)));
 
-    // Basic method with RGB color
-    public static void drawText(DrawContext context, String text, int x, int y,
-                                int rgbColor) {
-        // Create colored text
-        Text coloredText = Text.literal(text)
-                .setStyle(Style.EMPTY.withColor(TextColor.fromRgb(rgbColor)));
-
-        context.drawText(
-                client.textRenderer,
-                coloredText,
-                x, y,
-                rgbColor,
-                false
-        );
+        context.drawText(client.textRenderer, coloredText, x, y, rgbColor, false);
     }
 
-    public static void drawText(DrawContext context, Text text, int x, int y,
-                                int rgbColor) {
-        // Apply custom color to the text
-        Text coloredText = text.copy().setStyle(
-                text.getStyle().withColor(TextColor.fromRgb(rgbColor))
-        );
+    public static void drawText(DrawContext context, Text text, int x, int y, int rgbColor) {
+        Text coloredText = text.copy().setStyle(text.getStyle().withColor(TextColor.fromRgb(rgbColor)));
 
-        context.drawText(
-                client.textRenderer,
-                coloredText,
-                x, y,
-                rgbColor,
-                false
-        );
+        context.drawText(client.textRenderer, coloredText, x, y, rgbColor, false);
     }
 
-    public static void drawText(DrawContext context, OrderedText text, int x, int y,
-                                int rgbColor) {
-        // Draw OrderedText directly
-        context.drawText(
-                client.textRenderer,
-                text,
-                x, y,
-                rgbColor,
-                false
-        );
+    public static void drawText(DrawContext context, OrderedText text, int x, int y, int rgbColor) {
+        context.drawText(client.textRenderer, text, x, y, rgbColor, false);
     }
-
-    // Method with Minecraft formatting
-    public static void drawText(DrawContext context, String text, int x, int y,
-                                Formatting formatting) {
-        Text styledText = Text.literal(text).formatted(formatting);
-        context.drawText(
-                client.textRenderer,
-                styledText,
-                x, y,
-                getColorFromFormatting(formatting),
-                false
-        );
-    }
-
-    // === WIDTH MEASUREMENT METHODS ===
 
     public static int getStringWidth(String text) {
         return client.textRenderer.getWidth(text);
@@ -88,17 +43,9 @@ public class FontRenderer {
     public static int getStringWidth(OrderedText text) {
         return client.textRenderer.getWidth(text);
     }
-
-    // === CHARACTER POSITION METHODS (SIMPLIFIED) ===
-
-    /**
-     * Get character position at specific X coordinate
-     * Simple implementation that doesn't rely on TextHandler
-     */
     public static int getCharacterPosition(String text , int mouseX, int textX) {
         TextRenderer textRenderer = client.textRenderer;
 
-        // Simple implementation: iterate through characters to find position
         float relativeX = mouseX - textX;
         float currentX = 0;
 
@@ -106,65 +53,16 @@ public class FontRenderer {
             String charStr = text.substring(i, i + 1);
             float charWidth = textRenderer.getWidth(charStr);
 
-            // Check if mouse is within this character's bounds
             if (relativeX >= currentX && relativeX < currentX + charWidth) {
-                // Determine if closer to left or right edge
                 float charCenter = currentX + charWidth / 2;
                 return relativeX < charCenter ? i : i + 1;
             }
 
             currentX += charWidth;
         }
-
-        // If past the end of text, return text length
         return text.length();
     }
 
-    /**
-     * Alternative: Get approximate position using substring widths
-     */
-    public static int getCharacterPositionSimple(String text, int mouseX, int textX) {
-        TextRenderer textRenderer = client.textRenderer;
-        float relativeX = mouseX - textX;
-
-        if (relativeX <= 0) return 0;
-
-        float totalWidth = textRenderer.getWidth(text);
-        if (relativeX >= totalWidth) return text.length();
-
-        // Binary search for character position
-        int low = 0;
-        int high = text.length();
-
-        while (low < high) {
-            int mid = (low + high) / 2;
-            float width = textRenderer.getWidth(text.substring(0, mid));
-
-            if (width < relativeX) {
-                low = mid + 1;
-            } else {
-                high = mid;
-            }
-        }
-
-        // Adjust for character boundaries
-        if (low > 0) {
-            float widthBefore = textRenderer.getWidth(text.substring(0, low - 1));
-            float widthAt = textRenderer.getWidth(text.substring(0, low));
-            float charWidth = widthAt - widthBefore;
-
-            // If closer to previous character
-            if (relativeX - widthBefore < charWidth / 2) {
-                return low - 1;
-            }
-        }
-
-        return low;
-    }
-
-    /**
-     * Get X position of a specific character index
-     */
     public static int getXPositionAtIndex(String text, int charIndex, int startX) {
         if (charIndex <= 0) return startX;
         if (charIndex > text.length()) charIndex = text.length();
@@ -173,8 +71,6 @@ public class FontRenderer {
         String substring = text.substring(0, charIndex);
         return startX + textRenderer.getWidth(substring);
     }
-
-    // === TEXT TRIMMING METHODS ===
 
     public static String trimToWidth(String text , int maxWidth) {
         return trimToWidth(text, maxWidth, "...");
@@ -189,8 +85,6 @@ public class FontRenderer {
 
         return textRenderer.trimToWidth(text, availableWidth) + suffix;
     }
-
-    // === CENTERING UTILITIES ===
 
     public static void drawCenteredText(DrawContext context, String text, int centerX, int y,
                                         int rgbColor) {
@@ -207,23 +101,13 @@ public class FontRenderer {
     public static void drawCenteredText(DrawContext context, OrderedText text, int centerX, int y,
                                         int rgbColor) {
         int width = getStringWidth(text);
-        context.drawText(
-                client.textRenderer,
-                text,
-                centerX - width / 2, y,
-                rgbColor,
-                false
-        );
+        context.drawText(client.textRenderer, text, centerX - width / 2, y, rgbColor, false);
     }
 
-    public static void drawRightAligned(DrawContext context, String text,
-                                        int rightX, int y,
-                                        int color) {
+    public static void drawRightAligned(DrawContext context, String text, int rightX, int y, int color) {
         int width = getStringWidth(text);
         drawText(context, text, rightX - width, y, color );
     }
-
-    // === MULTI-LINE TEXT SUPPORT ===
 
     public static int getMultilineHeight(String text, int maxWidth) {
         TextRenderer textRenderer = client.textRenderer;
@@ -242,83 +126,35 @@ public class FontRenderer {
         List<OrderedText> lines = textRenderer.wrapLines(Text.literal(text), maxWidth);
 
         for (int i = 0; i < lines.size(); i++) {
-            context.drawText(
-                    textRenderer,
-                    lines.get(i),
-                    x, y + (i * 9),
-                    color,
-                    false
-            );
+            context.drawText(textRenderer, lines.get(i), x, y + (i * 9), color, false);
         }
     }
 
-    // === SHADOW EFFECTS ===
-
     public static void drawTextWithShadow(DrawContext context, String text, int x, int y,
                                           int rgbColor) {
-        Text coloredText = Text.literal(text)
-                .setStyle(Style.EMPTY.withColor(TextColor.fromRgb(rgbColor)));
+        Text coloredText = Text.literal(text).setStyle(Style.EMPTY.withColor(TextColor.fromRgb(rgbColor)));
 
-        context.drawText(
-                client.textRenderer,
-                coloredText,
-                x, y,
-                rgbColor,
-                true
-        );
+        context.drawText(client.textRenderer, coloredText, x, y, rgbColor, true);
     }
 
-    public static void drawTextWithShadow(DrawContext context, Text text, int x, int y,
-                                          int rgbColor ) {
-        Text coloredText = text.copy().setStyle(
-                text.getStyle().withColor(TextColor.fromRgb(rgbColor))
-        );
+    public static void drawTextWithShadow(DrawContext context, Text text, int x, int y, int rgbColor ) {
+        Text coloredText = text.copy().setStyle(text.getStyle().withColor(TextColor.fromRgb(rgbColor)));
 
-        context.drawText(
-                client.textRenderer,
-                coloredText,
-                x, y,
-                rgbColor,
-                true
-        );
+        context.drawText(client.textRenderer, coloredText, x, y, rgbColor, true);
     }
 
-    public static void drawTextWithShadow(DrawContext context, OrderedText text, int x, int y,
-                                          int rgbColor ) {
-        context.drawText(
-                client.textRenderer,
-                text,
-                x, y,
-                rgbColor,
-                true
-        );
+    public static void drawTextWithShadow(DrawContext context, OrderedText text, int x, int y, int rgbColor ) {
+        context.drawText(client.textRenderer, text, x, y, rgbColor, true);
     }
-
-    // === COLOR UTILITIES ===
 
     private static int getColorFromFormatting(Formatting formatting) {
         return formatting.getColorValue() != null ? formatting.getColorValue() : 0xFFFFFF;
     }
 
-    /**
-     * Check if text fits within a given width
-     */
     public static boolean fitsInWidth(String text, int maxWidth) {
         return getStringWidth(text) <= maxWidth;
     }
 
-    /**
-     * Create a blinking cursor effect
-     */
-    public static void drawCursor(DrawContext context, int x, int y, int tickCounter) {
-        if ((tickCounter / 10) % 2 == 0) {
-            context.fill(x, y, x + 1, y + 9, 0xFFFFFFFF);
-        }
-    }
-
-    /**
-     * Draw text selection highlight
-     */
     public static void drawSelection(DrawContext context, String text, int startIndex, int endIndex, int textX, int textY) {
         if (startIndex == endIndex) return;
 

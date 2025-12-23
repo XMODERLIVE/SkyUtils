@@ -21,28 +21,21 @@ public class AbstractTextButton extends AbstractButton {
     protected void renderAni(DrawContext ctx, int mouseX, int mouseY, float delta) {
         int alpha = animValue();
 
-        // Lower alpha for icon button too
         int bgAlpha;
         if (isHovered()) {
-            bgAlpha = 60 + alpha; // More visible when hovered
+            bgAlpha = 80 + alpha;
         } else {
-            bgAlpha = 40 + alpha; // Very subtle when not hovered
+            bgAlpha = 40 + alpha;
         }
 
         bgAlpha = Math.min(bgAlpha, 120);
 
-        // Dark gray with low alpha
         int bgColor = (bgAlpha << 24) | 0x303030;
 
-        // Simple rectangle
         render2D.rect(ctx, getX(), getY(), width, height, bgColor);
 
-        // Draw text with full opacity for readability
-        int textColor = 0xFFFFFFFF; // White text, full opacity
-        ctx.drawCenteredTextWithShadow(client.textRenderer, getMessage(),
-                getX() + width / 2,
-                getY() + (height - client.textRenderer.fontHeight) / 2,
-                textColor);
+        int textColor = 0xFFFFFFFF;
+        ctx.drawCenteredTextWithShadow(client.textRenderer, getMessage(), getX() + width / 2, getY() + (height - client.textRenderer.fontHeight) / 2, textColor);
     }
 
     @Override

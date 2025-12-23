@@ -23,39 +23,24 @@ public class AbstractIconButton extends AbstractButton {
     protected void renderAni(DrawContext ctx, int mouseX, int mouseY, float delta) {
         int alpha = animValue();
 
-        // Lower alpha for icon button too
         int bgAlpha;
         if (isHovered()) {
-            bgAlpha = 60 + alpha; // More visible when hovered
+            bgAlpha = 80 + alpha;
         } else {
-            bgAlpha = 40 + alpha; // Very subtle when not hovered
+            bgAlpha = 40 + alpha;
         }
 
-        bgAlpha = Math.min(bgAlpha, 120); // Keep it transparent
+        bgAlpha = Math.min(bgAlpha, 120);
 
-        // Dark background with low alpha
         int bgColor = (bgAlpha << 24) | 0x303030;
 
-        // Simple square button
         render2D.rect(ctx, getX(), getY(), width, height, bgColor);
 
-        // Calculate centered icon position
         int iconSize = Math.max(width - 8, 1);
         int iconX = getX() + (width - iconSize) / 2;
         int iconY = getY() + (height - iconSize) / 2;
 
-        // Draw icon with some transparency
-        try {
-            ctx.drawTexture(RenderPipelines.GUI_TEXTURED, icon, iconX, iconY, 0, 0, iconSize, iconSize, iconSize, iconSize);
-        } catch (Exception e) {
-            // If icon fails to load, draw a subtle placeholder
-            int placeholderAlpha = 150; // Semi-transparent placeholder
-            int placeholderColor = (placeholderAlpha << 24) | 0xFFFFFF;
-            ctx.fill(iconX, iconY, iconX + iconSize, iconY + 1, placeholderColor);
-            ctx.fill(iconX, iconY + iconSize - 1, iconX + iconSize, iconY + iconSize, placeholderColor);
-            ctx.fill(iconX, iconY, iconX + 1, iconY + iconSize, placeholderColor);
-            ctx.fill(iconX + iconSize - 1, iconY, iconX + iconSize, iconY + iconSize, placeholderColor);
-        }
+        ctx.drawTexture(RenderPipelines.GUI_TEXTURED, icon, iconX, iconY, 0, 0, iconSize, iconSize, iconSize, iconSize);
     }
 
     @Override
