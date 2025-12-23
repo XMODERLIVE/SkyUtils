@@ -13,6 +13,7 @@ import net.notnightsky.skyutils.SkyutilsClient;
 import net.notnightsky.skyutils.gui.titleMenu.widget.AbstractIconButton;
 import net.notnightsky.skyutils.gui.titleMenu.widget.AbstractTextButton;
 import net.notnightsky.skyutils.utils.font.FontRenderer;
+import net.notnightsky.skyutils.utils.render.render2D;
 
 public class screen extends Screen {
     private static final Identifier CROSS_ICON = Identifier.of("skyutils", "icon/cross.png");
@@ -75,10 +76,11 @@ public class screen extends Screen {
 
         super.render(ctx, mouseX, mouseY, delta);
         drawCopyright(ctx);
-        drawVersion(ctx);
+        drawMod(ctx);
     }
-    private void drawVersion(DrawContext ctx){
+    private void drawMod(DrawContext ctx){
         String version = SkyutilsClient.modName + " " + SkyutilsClient.modVersion + " " + SkyutilsClient.mcVer;
+        render2D.drawPicture(ctx,width / 2 - 30,height / 2 - 114,64,64,0x40ffffff,Identifier.of(SkyutilsClient.modID, "icon/skylogo.png"));
         FontRenderer.drawText(ctx, version,1,height - FontRenderer.getFontHeight(),0x50ffffff);
     }
 
