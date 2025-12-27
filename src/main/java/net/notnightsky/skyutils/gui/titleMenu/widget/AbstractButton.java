@@ -8,27 +8,15 @@ import net.notnightsky.skyutils.utils.animation.Animate;
 import net.notnightsky.skyutils.utils.animation.Easing;
 
 public abstract class AbstractButton extends ClickableWidget {
-    protected final Animate animate;
-
+    protected final Animate animate = new Animate();
     protected AbstractButton(int x, int y, int width, int height, Text message) {
         super(x, y, width, height, message);
-        this.animate = new Animate().setEase(Easing.LINEAR).setMin(0).setMax(25).setSpeed(3);
+        animate.setEase(Easing.LINEAR).setMin(0).setMax(70).setSpeed(200);
     }
 
     @Override
     protected final void renderWidget(DrawContext ctx, int mouseX, int mouseY, float delta) {
-        if (this.isHovered()) {
-            animate.toMax();
-        } else {
-            animate.toMin();
-        }
-
-        animate.update();
         renderAni(ctx, mouseX, mouseY, delta);
-    }
-
-    protected final int animValue() {
-        return (int) animate.getValueInt();
     }
 
     protected abstract void renderAni(DrawContext ctx, int mouseX, int mouseY, float delta);

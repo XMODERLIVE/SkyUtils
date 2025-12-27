@@ -7,7 +7,10 @@ import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.narration.NarrationMessageBuilder;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
+import net.notnightsky.skyutils.utils.animation.Animate;
 import net.notnightsky.skyutils.utils.render.render2D;
+
+import java.awt.*;
 
 public class AbstractIconButton extends AbstractButton {
     private final Identifier icon;
@@ -21,20 +24,9 @@ public class AbstractIconButton extends AbstractButton {
 
     @Override
     protected void renderAni(DrawContext ctx, int mouseX, int mouseY, float delta) {
-        int alpha = animValue();
+        animate.update().setReversed(!isHovered());
 
-        int bgAlpha;
-        if (isHovered()) {
-            bgAlpha = 80 + alpha;
-        } else {
-            bgAlpha = 40 + alpha;
-        }
-
-        bgAlpha = Math.min(bgAlpha, 120);
-
-        int bgColor = (bgAlpha << 24) | 0x303030;
-
-        render2D.rect(ctx, getX(), getY(), width, height, bgColor);
+        render2D.rect(ctx, getX(), getY(), width, height, new Color(30, 30, 30, animate.getValueI() + 60).getRGB());
 
         int iconSize = Math.max(width - 8, 1);
         int iconX = getX() + (width - iconSize) / 2;

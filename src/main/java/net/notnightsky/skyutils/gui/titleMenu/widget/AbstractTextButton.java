@@ -8,6 +8,8 @@ import net.minecraft.client.gui.screen.narration.NarrationMessageBuilder;
 import net.minecraft.text.Text;
 import net.notnightsky.skyutils.utils.render.render2D;
 
+import java.awt.*;
+
 public class AbstractTextButton extends AbstractButton {
     private final MinecraftClient client = MinecraftClient.getInstance();
     private final Runnable action;
@@ -19,20 +21,9 @@ public class AbstractTextButton extends AbstractButton {
 
     @Override
     protected void renderAni(DrawContext ctx, int mouseX, int mouseY, float delta) {
-        int alpha = animValue();
+        animate.update().setReversed(!isHovered());
 
-        int bgAlpha;
-        if (isHovered()) {
-            bgAlpha = 80 + alpha;
-        } else {
-            bgAlpha = 40 + alpha;
-        }
-
-        bgAlpha = Math.min(bgAlpha, 120);
-
-        int bgColor = (bgAlpha << 24) | 0x303030;
-
-        render2D.rect(ctx, getX(), getY(), width, height, bgColor);
+        render2D.rect(ctx, getX(), getY(), width, height, new Color(30, 30, 30, animate.getValueI() + 60).getRGB());
 
         int textColor = 0xFFFFFFFF;
         ctx.drawCenteredTextWithShadow(client.textRenderer, getMessage(), getX() + width / 2, getY() + (height - client.textRenderer.fontHeight) / 2, textColor);
