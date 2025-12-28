@@ -7,7 +7,6 @@ import net.minecraft.client.gui.screen.multiplayer.MultiplayerScreen;
 import net.minecraft.client.gui.screen.option.OptionsScreen;
 import net.minecraft.client.gui.screen.world.SelectWorldScreen;
 import net.minecraft.client.realms.gui.screen.RealmsMainScreen;
-import net.minecraft.client.render.RenderTickCounter;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.notnightsky.skyutils.SkyutilsClient;
@@ -18,6 +17,7 @@ import net.notnightsky.skyutils.utils.render.render2D;
 
 public class screen extends Screen {
     private static final Identifier CROSS_ICON = Identifier.of("skyutils", "icon/cross.png");
+    private static final Identifier MODMENU_ICON = Identifier.of(SkyutilsClient.modID, "icon/modmenu_logo.png");
 
     public screen() {
         super(Text.literal("SkyUtils Menu"));
@@ -57,14 +57,14 @@ public class screen extends Screen {
             }}));
 
         // Close/Exit button (top-right)
-        addDrawableChild(new AbstractIconButton(width - 28, 12, 20, Identifier.of("skyutils", "icon/cross.png"), () -> {
+        addDrawableChild(new AbstractIconButton(width - 28, 12, 20, CROSS_ICON, () -> {
             if (client != null) {
                 client.scheduleStop();
             }}));
         //                                                        btn size
         //                                                           +
         //ModMenu                                   stop btn x     padding
-        addDrawableChild(new AbstractIconButton((width - 28) - (20 + 5), 12, 20, Identifier.of(SkyutilsClient.modID, "icon/modmenu_logo.png"), () -> {
+        addDrawableChild(new AbstractIconButton((width - 28) - (20 + 5), 12, 20, MODMENU_ICON, () -> {
             if (client != null) {
                 client.setScreen(new ModsScreen(this));
             }}));
@@ -75,7 +75,6 @@ public class screen extends Screen {
 
         // Semi-transparent dark background
         ctx.fill(0, 0, width, height, 0x88000000);
-
         super.render(ctx, mouseX, mouseY, delta);
         drawCopyright(ctx);
         drawMod(ctx);

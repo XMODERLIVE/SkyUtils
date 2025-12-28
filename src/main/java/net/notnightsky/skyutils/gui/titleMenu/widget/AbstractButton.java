@@ -8,6 +8,7 @@ import net.notnightsky.skyutils.utils.animation.Animate;
 import net.notnightsky.skyutils.utils.animation.Easing;
 
 public abstract class AbstractButton extends ClickableWidget {
+
     protected final Animate animate = new Animate();
     protected AbstractButton(int x, int y, int width, int height, Text message) {
         super(x, y, width, height, message);

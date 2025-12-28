@@ -1,7 +1,6 @@
 package net.notnightsky.skyutils.gui.titleMenu.widget;
 
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.gl.RenderPipelines;
 import net.minecraft.client.gui.Click;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.narration.NarrationMessageBuilder;
@@ -23,7 +22,7 @@ public class AbstractTextButton extends AbstractButton {
     protected void renderAni(DrawContext ctx, int mouseX, int mouseY, float delta) {
         animate.update().setReversed(!isHovered());
 
-        render2D.rect(ctx, getX(), getY(), width, height, new Color(30, 30, 30, animate.getValueI() + 60).getRGB());
+        render2D.roundedRect(ctx, getX(), getY(), width, height,8, new Color(30, 30, 30, animate.getValueI() + 60));
 
         int textColor = 0xFFFFFFFF;
         ctx.drawCenteredTextWithShadow(client.textRenderer, getMessage(), getX() + width / 2, getY() + (height - client.textRenderer.fontHeight) / 2, textColor);
