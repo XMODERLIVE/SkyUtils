@@ -17,6 +17,7 @@ import net.notnightsky.skyutils.utils.render.render2D;
 
 public class screen extends Screen {
     private static final Identifier CROSS_ICON = Identifier.of("skyutils", "icon/cross.png");
+    private static final Identifier MODMENU_ICON = Identifier.of(SkyutilsClient.modID, "icon/modmenu_logo.png");
 
     public screen() {
         super(Text.literal("SkyUtils Menu"));
@@ -56,14 +57,14 @@ public class screen extends Screen {
             }}));
 
         // Close/Exit button (top-right)
-        addDrawableChild(new AbstractIconButton(width - 28, 12, 20, Identifier.of("skyutils", "icon/cross.png"), () -> {
+        addDrawableChild(new AbstractIconButton(width - 28, 12, 20, CROSS_ICON, () -> {
             if (client != null) {
                 client.scheduleStop();
             }}));
         //                                                        btn size
         //                                                           +
         //ModMenu                                   stop btn x     padding
-        addDrawableChild(new AbstractIconButton((width - 28) - (20 + 5), 12, 20, CROSS_ICON, () -> {
+        addDrawableChild(new AbstractIconButton((width - 28) - (20 + 5), 12, 20, MODMENU_ICON, () -> {
             if (client != null) {
                 client.setScreen(new ModsScreen(this));
             }}));
