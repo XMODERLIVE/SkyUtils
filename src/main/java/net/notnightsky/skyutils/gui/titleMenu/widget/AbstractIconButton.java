@@ -1,18 +1,17 @@
 package net.notnightsky.skyutils.gui.titleMenu.widget;
 
-import com.mojang.blaze3d.pipeline.RenderPipeline;
 import net.minecraft.client.gl.RenderPipelines;
 import net.minecraft.client.gui.Click;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.narration.NarrationMessageBuilder;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
-import net.notnightsky.skyutils.utils.animation.Animate;
 import net.notnightsky.skyutils.utils.render.render2D;
 
 import java.awt.*;
 
 public class AbstractIconButton extends AbstractButton {
+
     private final Identifier icon;
     private final Runnable action;
 

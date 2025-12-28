@@ -63,7 +63,7 @@ public class screen extends Screen {
         //                                                        btn size
         //                                                           +
         //ModMenu                                   stop btn x     padding
-        addDrawableChild(new AbstractIconButton((width - 28) - (20 + 5), 12, 20, Identifier.of(SkyutilsClient.modID, "icon/modmenu_logo.png"), () -> {
+        addDrawableChild(new AbstractIconButton((width - 28) - (20 + 5), 12, 20, CROSS_ICON, () -> {
             if (client != null) {
                 client.setScreen(new ModsScreen(this));
             }}));
@@ -74,7 +74,6 @@ public class screen extends Screen {
 
         // Semi-transparent dark background
         ctx.fill(0, 0, width, height, 0x88000000);
-
         super.render(ctx, mouseX, mouseY, delta);
         drawCopyright(ctx);
         drawMod(ctx);
