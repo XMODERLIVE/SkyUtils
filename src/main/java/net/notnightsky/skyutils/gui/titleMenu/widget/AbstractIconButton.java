@@ -26,7 +26,7 @@ public class AbstractIconButton extends AbstractButton {
     protected void renderAni(DrawContext ctx, int mouseX, int mouseY, float delta) {
         animate.update().setReversed(!isHovered());
 
-        render2D.rect(ctx, getX(), getY(), width, height, new Color(30, 30, 30, animate.getValueI() + 60).getRGB());
+        render2D.roundedRect(ctx, getX(), getY(), width, height,8, new Color(30, 30, 30, animate.getValueI() + 60));
 
         int iconSize = Math.max(width - 8, 1);
         int iconX = getX() + (width - iconSize) / 2;

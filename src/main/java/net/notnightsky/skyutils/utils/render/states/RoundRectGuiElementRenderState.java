@@ -1,4 +1,4 @@
-package net.notnightsky.skyutils.utils.render;
+package net.notnightsky.skyutils.utils.render.states;
 
 import com.mojang.blaze3d.pipeline.BlendFunction;
 import com.mojang.blaze3d.pipeline.RenderPipeline;
@@ -13,12 +13,14 @@ import net.minecraft.client.gui.render.state.SimpleGuiElementRenderState;
 import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.VertexFormats;
 import net.minecraft.client.texture.TextureSetup;
+import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.Nullable;
 import org.joml.Matrix3x2f;
 
 @Environment(EnvType.CLIENT)
 public class RoundRectGuiElementRenderState implements SimpleGuiElementRenderState {
     public static final RenderPipeline PIPELINE_QUADS = RenderPipeline.builder(RenderPipelines.POSITION_COLOR_SNIPPET)
+            .withLocation(Identifier.of("skyutils", "quad"))
             .withVertexFormat(VertexFormats.POSITION_COLOR, VertexFormat.DrawMode.QUADS)
             .withBlend(BlendFunction.TRANSLUCENT)
             .withCull(false)

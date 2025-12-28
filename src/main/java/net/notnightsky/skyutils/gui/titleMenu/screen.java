@@ -1,32 +1,22 @@
 package net.notnightsky.skyutils.gui.titleMenu;
 
-import com.mojang.blaze3d.pipeline.RenderPipeline;
-import com.mojang.blaze3d.vertex.VertexFormat;
 import com.terraformersmc.modmenu.gui.ModsScreen;
 import net.minecraft.client.gui.DrawContext;
-import net.minecraft.client.gui.ScreenRect;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.screen.multiplayer.MultiplayerScreen;
 import net.minecraft.client.gui.screen.option.OptionsScreen;
 import net.minecraft.client.gui.screen.world.SelectWorldScreen;
 import net.minecraft.client.realms.gui.screen.RealmsMainScreen;
-import net.minecraft.client.render.RenderTickCounter;
-import net.minecraft.client.render.VertexFormats;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.notnightsky.skyutils.SkyutilsClient;
 import net.notnightsky.skyutils.gui.titleMenu.widget.AbstractIconButton;
 import net.notnightsky.skyutils.gui.titleMenu.widget.AbstractTextButton;
 import net.notnightsky.skyutils.utils.font.FontRenderer;
-import net.notnightsky.skyutils.utils.render.RoundRectGuiElementRenderState;
 import net.notnightsky.skyutils.utils.render.render2D;
-import org.joml.Matrix3x2f;
-
-import java.awt.*;
 
 public class screen extends Screen {
     private static final Identifier CROSS_ICON = Identifier.of("skyutils", "icon/cross.png");
-    public static final RenderPipeline PIPELINE_COLOR_QUADS = RenderPipeline.builder().withVertexFormat(VertexFormats.POSITION_COLOR, VertexFormat.DrawMode.QUADS).build();
 
     public screen() {
         super(Text.literal("SkyUtils Menu"));
@@ -86,7 +76,6 @@ public class screen extends Screen {
         ctx.fill(0, 0, width, height, 0x88000000);
 
         super.render(ctx, mouseX, mouseY, delta);
-        render2D.roundedRect(ctx, width/2, height/2, 100, 50, 6, new Color(255 ,255, 255, 255));
         drawCopyright(ctx);
         drawMod(ctx);
     }

@@ -2,16 +2,10 @@ package net.notnightsky.skyutils.utils.render;
 
 import com.mojang.blaze3d.opengl.GlStateManager;
 import com.mojang.blaze3d.pipeline.RenderPipeline;
-import com.mojang.blaze3d.systems.RenderSystem;
-import com.mojang.blaze3d.vertex.VertexFormat;
-import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gl.RenderPipelines;
 import net.minecraft.client.gui.DrawContext;
-import net.minecraft.client.render.BufferBuilder;
-import net.minecraft.client.render.BuiltBuffer;
-import net.minecraft.client.render.Tessellator;
-import net.minecraft.client.render.VertexFormats;
 import net.minecraft.util.Identifier;
+import net.notnightsky.skyutils.utils.render.states.RoundRectGuiElementRenderState;
 
 import java.awt.*;
 
@@ -19,8 +13,6 @@ public final class render2D {
     private static final RenderPipeline GUI_PIPELINE = RenderPipelines.GUI_TEXTURED;
 
     private render2D() {}
-
-    private static final RenderPipeline GUI_TITLE_PIPELINE = RenderPipeline.builder(RenderPipelines.GUI_SNIPPET).withVertexFormat(VertexFormats.POSITION_COLOR , VertexFormat.DrawMode.TRIANGLE_FAN).withCull(false).build();
 
     public static void rect(DrawContext ctx, int x, int y, int width, int height, int color) {
         ctx.fill(x, y, x + width, y + height, color);
