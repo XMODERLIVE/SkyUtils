@@ -13,13 +13,21 @@ import net.minecraft.client.render.Tessellator;
 import net.minecraft.client.render.VertexFormats;
 import net.minecraft.util.Identifier;
 
+import java.awt.*;
+
 public final class render2D {
     private static final RenderPipeline GUI_PIPELINE = RenderPipelines.GUI_TEXTURED;
 
     private render2D() {}
 
+    private static final RenderPipeline GUI_TITLE_PIPELINE = RenderPipeline.builder(RenderPipelines.GUI_SNIPPET).withVertexFormat(VertexFormats.POSITION_COLOR , VertexFormat.DrawMode.TRIANGLE_FAN).withCull(false).build();
+
     public static void rect(DrawContext ctx, int x, int y, int width, int height, int color) {
         ctx.fill(x, y, x + width, y + height, color);
+    }
+
+    public static void roundedRect(DrawContext context, int x, int y, int w, int h, int r, Color color){
+        context.state.addSimpleElement(new RoundRectGuiElementRenderState(context, x, y, w, h, r, color.getRGB()));
     }
 
     public static void texture(DrawContext ctx, Identifier texture, int x, int y, int width, int height) {
