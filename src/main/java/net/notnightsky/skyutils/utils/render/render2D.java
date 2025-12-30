@@ -53,44 +53,4 @@ public final class render2D {
             rect(ctx, x, y, width, height, tintColor);
         }
     }
-//    public static void circle(DrawContext ctx, int x, int y, int r, int h, int j, int color){
-//        GlStateManager._enableBlend();
-//        GlStateManager._disableCull();
-//
-//        Tessellator tessellator = Tessellator.getInstance();
-//        BufferBuilder buffer = tessellator.begin(VertexFormat.DrawMode.TRIANGLE_FAN, VertexFormats.POSITION_COLOR);
-//
-//        for (int angle = h; angle <= j; angle++) {
-//            float rad = (float) Math.toRadians(angle);
-//            float px = (float) (Math.cos(rad) * r + x);
-//            float py = (float) (Math.sin(rad) * r + y);
-//
-//            buffer.vertex(ctx.getMatrices(), px, py).color(color);
-//        }
-//        GlStateManager._disableBlend();
-//        GlStateManager._enableCull();
-//    }
-//    public static void drawCircle(float x, float y, float r, int h, int j, int color) {
-//        GL11.glEnable(GL_BLEND);
-//        GL11.glDisable(GL11.GL_CULL_FACE);
-//        GL11.glDisable(GL11.GL_TEXTURE_2D);
-//        glBegin(GL_TRIANGLE_FAN);
-//
-//        ColorHelper.color(color);
-//
-//        float var;
-//        glVertex2f(x, y);
-//        for (var = h; var <= j; var++) {
-//            ColorHelper.color(color);
-//            glVertex2f(
-//                    (float) (r * Math.cos(Math.PI * var / 180) + x),
-//                    (float) (r * Math.sin(Math.PI * var / 180) + y)
-//            );
-//        }
-//
-//        glEnd();
-//        GL11.glEnable(GL11.GL_TEXTURE_2D);
-//        GL11.glEnable(GL11.GL_CULL_FACE);
-//        GL11.glDisable(GL_BLEND);
-//    }
 }

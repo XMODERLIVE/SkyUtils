@@ -1,32 +1,20 @@
 package net.notnightsky.skyutils.utils.render.states;
 
-import com.mojang.blaze3d.pipeline.BlendFunction;
 import com.mojang.blaze3d.pipeline.RenderPipeline;
-import com.mojang.blaze3d.platform.DepthTestFunction;
-import com.mojang.blaze3d.vertex.VertexFormat;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.client.gl.RenderPipelines;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.ScreenRect;
 import net.minecraft.client.gui.render.state.SimpleGuiElementRenderState;
 import net.minecraft.client.render.VertexConsumer;
-import net.minecraft.client.render.VertexFormats;
 import net.minecraft.client.texture.TextureSetup;
-import net.minecraft.util.Identifier;
+import net.notnightsky.skyutils.utils.render.UtilRenderPipelines;
 import org.jetbrains.annotations.Nullable;
 import org.joml.Matrix3x2f;
 
 @Environment(EnvType.CLIENT)
 public class RoundRectGuiElementRenderState implements SimpleGuiElementRenderState {
-    public static final RenderPipeline PIPELINE_QUADS = RenderPipeline.builder(RenderPipelines.POSITION_COLOR_SNIPPET)
-            .withLocation(Identifier.of("skyutils", "quad"))
-            .withVertexFormat(VertexFormats.POSITION_COLOR, VertexFormat.DrawMode.QUADS)
-            .withBlend(BlendFunction.TRANSLUCENT)
-            .withCull(false)
-            .withDepthWrite(false)
-            .withDepthTestFunction(DepthTestFunction.NO_DEPTH_TEST)
-            .build();
+    public static final RenderPipeline PIPELINE_QUADS = UtilRenderPipelines.PIPELINE_QUADS;
 
     private final RenderPipeline pipeline;
     private final TextureSetup texture;
@@ -72,8 +60,6 @@ public class RoundRectGuiElementRenderState implements SimpleGuiElementRenderSta
         this(context, x, y, w, h, r, color, color, color, color, color);
     }
 
-    // squeezes entire quads into triangle fans for rounded rectangle
-    // ...yeah i know ...blame vibrant visuals
     @Override
     public void setupVertices(VertexConsumer buf) {
         float[][] corners = {

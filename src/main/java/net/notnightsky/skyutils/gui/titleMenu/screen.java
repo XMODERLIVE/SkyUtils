@@ -79,6 +79,7 @@ public class screen extends Screen {
         drawCopyright(ctx);
         drawMod(ctx);
     }
+
     private void drawMod(DrawContext ctx){
         String version = SkyutilsClient.modName + " " + SkyutilsClient.modVersion + " " + SkyutilsClient.mcVer;
         render2D.drawPicture(ctx,width / 2 - 30,height / 2 - 114,64,64,0x40ffffff,Identifier.of(SkyutilsClient.modID, "icon/skylogo.png"));
