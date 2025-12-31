@@ -10,6 +10,7 @@
     "furnaceScreenMixin",
     "InGameHudMixin",
     "InGameOverlayRendererMixin",
+    "MouseMixin",
     "PlayerEntityRendererMixin",
     "PlayerEntityRenderStateMixin",
     "ShieldModelRendererMixin",
@@ -23,5 +24,6 @@
     "requireAnnotations": true
   },
   "mixins": [
+    "GameRendererMixin"
   ]
 }

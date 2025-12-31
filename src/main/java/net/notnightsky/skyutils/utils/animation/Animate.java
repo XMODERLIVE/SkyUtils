@@ -5,6 +5,8 @@
 
 package net.notnightsky.skyutils.utils.animation;
 
+import net.notnightsky.skyutils.utils.DeltaTime;
+
 public class Animate {
 
     private float value, min, max, speed, time;
@@ -27,9 +29,9 @@ public class Animate {
     public Animate update() {
         float speedFactor = 0.001F;
         if (reversed) {
-            if (time > min) time -= (DeltaTime.get() * speed * speedFactor);
+            if (time > min) time -= (DeltaTime.getMs() * speed * speedFactor);
         } else {
-            if (time < max) time += (DeltaTime.get() * speed * speedFactor);
+            if (time < max) time += (DeltaTime.getMs() * speed * speedFactor);
         }
         time = clamp(time, min, max);
         float easeVal = getEase().ease(time - min, min, max - min, max - min);

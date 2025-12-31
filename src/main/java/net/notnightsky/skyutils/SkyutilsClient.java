@@ -10,7 +10,6 @@ import net.notnightsky.skyutils.config.modConfig;
 import net.notnightsky.skyutils.modmenu.modMenuIntegration;
 import net.notnightsky.skyutils.modules.discordRpc.IPCManager;
 import net.notnightsky.skyutils.modules.fullbright.fullBright;
-import net.notnightsky.skyutils.utils.animation.DeltaTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -31,7 +30,6 @@ public class SkyutilsClient implements ClientModInitializer {
         new modMenuIntegration();
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
             new fullBright().noDarknessEffect();
-            DeltaTime.update();
         });
     }
 }

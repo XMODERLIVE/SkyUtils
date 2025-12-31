@@ -1,4 +1,4 @@
-package net.notnightsky.skyutils.utils.animation;
+package net.notnightsky.skyutils.utils;
 
 public class DeltaTime {
     private static long lastFrame = System.nanoTime();
@@ -12,7 +12,10 @@ public class DeltaTime {
         if (deltaTime > 50f) deltaTime = 50f;
     }
 
-    public static float get() {
+    public static float getMs() {
         return deltaTime;
+    }
+    public static float getSec() {
+        return deltaTime * 0.001f;
     }
 }

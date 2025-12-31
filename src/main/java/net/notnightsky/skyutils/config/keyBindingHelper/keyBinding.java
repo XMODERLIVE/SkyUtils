@@ -12,6 +12,7 @@ public class keyBinding {
     public static KeyBinding toggleFullBright;
     public static KeyBinding incrementFullBright;
     public static KeyBinding decrementFullBright;
+    public static KeyBinding zoomKey;
     public static boolean loaded = false;
 
     public static void registerKeybinds(){
@@ -20,6 +21,13 @@ public class keyBinding {
                 "key.skyutils.openMenu",
                 InputUtil.Type.KEYSYM,
                 GLFW.GLFW_KEY_RIGHT_SHIFT,
+                skyutilsCategory
+        ));
+
+        zoomKey = KeyBindingHelper.registerKeyBinding(new KeyBinding(
+                "key.skyutils.zoom",
+                InputUtil.Type.KEYSYM,
+                GLFW.GLFW_KEY_C,
                 skyutilsCategory
         ));
 
