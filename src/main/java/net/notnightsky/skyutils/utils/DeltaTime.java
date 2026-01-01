@@ -15,7 +15,5 @@ public class DeltaTime {
     public static float getMs() {
         return deltaTime;
     }
-    public static float getSec() {
-        return deltaTime * 0.001f;
-    }
+    public static float getSec() {return deltaTime * 0.001f;}
 }

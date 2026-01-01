@@ -44,13 +44,4 @@ public final class render2D {
 
         GlStateManager._disableBlend();
     }
-
-
-    public static void texture(DrawContext ctx, Identifier texture, int x, int y, int width, int height, int tintColor) {
-        texture(ctx, texture, x, y, width, height);
-
-        if ((tintColor >>> 24) < 255) {
-            rect(ctx, x, y, width, height, tintColor);
-        }
-    }
 }

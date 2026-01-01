@@ -11,6 +11,7 @@ import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.notnightsky.skyutils.config.keyBindingHelper.toggleHandler;
 import net.notnightsky.skyutils.modules.discordRpc.IPCManager;
+import net.notnightsky.skyutils.modules.zoom.InterpolationMode;
 
 import java.awt.*;
 
@@ -24,6 +25,16 @@ public class modConfig {
                     .setJson5(true)
                     .build())
             .build();
+
+    @SerialEntry
+    public static InterpolationMode interpolationType = InterpolationMode.LOGARITHMIC;
+
+    @SerialEntry
+    public static double zoomSpeed = 12.0;
+
+    @SerialEntry
+    public static double defaultZoom = 3.0;
+
     @SerialEntry
     public static double pumpkinOverlayOpacity = 0;
 
@@ -130,6 +141,29 @@ public class modConfig {
                         .build())
                 .category(ConfigCategory.createBuilder()
                         .name(Text.translatable(LOCAL_NAMESPACE_PATH + "group.render"))
+                        .group(OptionGroup.<Double>createBuilder()
+                                .name(Text.translatable(LOCAL_NAMESPACE_PATH + "group.zoom"))
+                                .option(Option.<Double>createBuilder()
+                                        .name(Text.translatable(LOCAL_NAMESPACE_PATH + "options.defaultZoom.name"))
+                                        .description(OptionDescription.of(Text.translatable(LOCAL_NAMESPACE_PATH + "options.defaultZoom.description")))
+                                        .binding(3.0, () -> modConfig.defaultZoom, newVal -> modConfig.defaultZoom = newVal)
+                                        .controller(opt -> DoubleFieldControllerBuilder.create(opt).range(1.0,50.0))
+                                        .build())
+                                .option(Option.<Double>createBuilder()
+                                        .name(Text.translatable(LOCAL_NAMESPACE_PATH + "options.zoomSpeed.name"))
+                                        .description(OptionDescription.of(Text.translatable(LOCAL_NAMESPACE_PATH + "options.zoomSpeed.description")))
+                                        .binding(12.0, () -> modConfig.zoomSpeed, newVal -> modConfig.zoomSpeed = newVal)
+                                        .controller(opt -> DoubleFieldControllerBuilder.create(opt).range(1.0,50.0))
+                                        .build())
+                                .option(Option.<InterpolationMode>createBuilder()
+                                        .name(Text.translatable(LOCAL_NAMESPACE_PATH + "options.interpolationType.name"))
+                                        .description(OptionDescription.of(Text.translatable(LOCAL_NAMESPACE_PATH + "options.interpolationType.description")))
+                                        .binding(InterpolationMode.LOGARITHMIC, () -> modConfig.interpolationType, newVal -> modConfig.interpolationType = newVal)
+                                        .controller(opt -> EnumControllerBuilder.create(opt)
+                                                .enumClass(InterpolationMode.class)
+                                                .formatValue(v -> Text.translatable(LOCAL_NAMESPACE_PATH + "interpolationType." + v.name().toLowerCase())))
+                                        .build())
+                                .build())
                         .group(OptionGroup.createBuilder()
                                 .name(Text.translatable( LOCAL_NAMESPACE_PATH + "group.fullBright"))
                                 .option(Option.<Boolean>createBuilder()

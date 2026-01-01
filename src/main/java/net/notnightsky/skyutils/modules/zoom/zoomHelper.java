@@ -3,13 +3,14 @@ package net.notnightsky.skyutils.modules.zoom;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.option.SimpleOption;
 import net.notnightsky.skyutils.config.keyBindingHelper.keyBinding;
+import net.notnightsky.skyutils.config.modConfig;
 import net.notnightsky.skyutils.utils.DeltaTime;
 import net.notnightsky.skyutils.utils.math;
 
 public class zoomHelper {
 
-    private static final double defaultZoom = 3.0;
-    private static final double lerpSpeed = 12.0;
+    private static final double defaultZoom = modConfig.defaultZoom;
+    private static final double lerpSpeed = modConfig.zoomSpeed;
 
     private static double baseZoom = 1.0;
     private static double scrollZoom = 1.0;
@@ -64,6 +65,6 @@ public class zoomHelper {
 
         targetLevel = baseZoom * scrollZoom;
 
-        currentLevel = math.lerpLog(currentLevel, targetLevel, lerpSpeed, dt);
+        currentLevel = math.interpolate(currentLevel, targetLevel, lerpSpeed, dt, modConfig.interpolationType);
     }
 }
