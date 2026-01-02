@@ -52,7 +52,7 @@ public final class math {
         if (start <= 0.0) start = 1e-6;
         if (end   <= 0.0) end   = 1e-6;
 
-        return Math.exp(Math.log(start) + (Math.log(end) - Math.log(start)) * t);
+        return Math.exp(Math.log(start) + ((Math.log(end) - Math.log(start))) * t);
     }
 
     public static double easeInOutSine(double t) {
