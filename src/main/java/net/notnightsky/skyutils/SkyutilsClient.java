@@ -2,11 +2,15 @@ package net.notnightsky.skyutils;
 
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
+import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
 import net.minecraft.SharedConstants;
 import net.minecraft.client.MinecraftClient;
 import net.notnightsky.skyutils.config.keyBindingHelper.keyBinding;
 import net.notnightsky.skyutils.config.keyBindingHelper.toggleHandler;
 import net.notnightsky.skyutils.config.modConfig;
+import net.notnightsky.skyutils.hud.CoordsHud;
+import net.notnightsky.skyutils.hud.FpsHud;
+import net.notnightsky.skyutils.hud.HudManager;
 import net.notnightsky.skyutils.modmenu.modMenuIntegration;
 import net.notnightsky.skyutils.modules.discordRpc.IPCManager;
 import net.notnightsky.skyutils.modules.fullbright.fullBright;
@@ -28,8 +32,23 @@ public class SkyutilsClient implements ClientModInitializer {
         keyBinding.registerKeybinds();
         toggleHandler.registerToggle();
         new modMenuIntegration();
+
+        // Initialize HUD system
+        initHudSystem(); // Re-enabled with simplified rendering
+
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
             new fullBright().noDarknessEffect();
+        });
+    }
+
+    private void initHudSystem() {
+        HudManager hudManager = HudManager.getInstance();
+        hudManager.add(new CoordsHud());
+        hudManager.add(new FpsHud());
+
+        // Register HUD rendering callback
+        HudRenderCallback.EVENT.register((context, tickCounter) -> {
+            hudManager.render(context, tickCounter.getDynamicDeltaTicks());
         });
     }
 }
