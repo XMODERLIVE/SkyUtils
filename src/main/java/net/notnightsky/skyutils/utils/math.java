@@ -4,70 +4,57 @@ import net.notnightsky.skyutils.modules.zoom.InterpolationMode;
 
 public final class math {
 
-    public static double interpolate(double start, double end, double speed, double delta, InterpolationMode mode) {
-        double t;
-
-        switch (mode) {
-            case LINEAR -> {
-                t = speed * delta;
-                t = Math.clamp(t, 0.0, 1.0);
-                return lerp(start, end, t);
-            }
-
-            case LOGARITHMIC -> {
-                t = 1.0 - Math.exp(-speed * delta);
-                return lerpLog(start, end, t);
-            }
-
-            case EASEINOUTSINE -> {
-                t = Math.clamp(speed * delta, 0.0, 1.0);
-                return lerp(start, end, easeInOutSine(t));
-            }
-
-            case EASEOUTCUBIC -> {
-                t = Math.clamp(speed * delta, 0.0, 1.0);
-                return lerp(start, end, easeOutCubic(t));
-            }
-
-            case EASEOUTQUAD -> {
-                t = Math.clamp(speed * delta, 0.0, 1.0);
-                return lerp(start, end, easeOutQuad(t));
-            }
-
-            case EASEOUTEXPO -> {
-                t = Math.clamp(speed * delta, 0.0, 1.0);
-                return lerp(start, end, easeOutExpo(t));
-            }
+    public static double interpolate(double current, double target, double speed, double deltaTime, InterpolationMode mode) {
+        if (mode == InterpolationMode.INSTANT || speed <= 0.0) {
+            return target;
         }
 
-        return end;
+        double t = smoothingFactor(speed, deltaTime);
+
+        t = switch (mode) {
+            case LINEAR -> t;
+            case LOGARITHMIC -> t;
+            case EASEINOUTSINE -> easeInOutSine(t);
+            case EASEOUTCUBIC -> easeOutCubic(t);
+            case EASEOUTQUAD -> easeOutQuad(t);
+            case EASEOUTEXPO -> easeOutExpo(t);
+            default -> t;
+        };
+
+        if (mode == InterpolationMode.LOGARITHMIC) {
+            return lerpLog(current, target, t);
+        }
+
+        return lerp(current, target, t);
     }
 
-
-    public static double lerp(double start, double end, double t) {
-        return start + (end - start) * t;
+    private static double smoothingFactor(double speed, double dt) {
+        return 1.0 - Math.exp(-speed * dt);
     }
 
-    public static double lerpLog(double start, double end, double t) {
-        if (start <= 0.0) start = 1e-6;
-        if (end   <= 0.0) end   = 1e-6;
-
-        return Math.exp(Math.log(start) + ((Math.log(end) - Math.log(start))) * t);
+    public static double lerp(double a, double b, double t) {
+        return a + (b - a) * t;
     }
 
-    public static double easeInOutSine(double t) {
-        return -(Math.cos(Math.PI * t) - 1) / 2;
+    private static double lerpLog(double a, double b, double t) {
+        a = Math.max(a, 1e-6);
+        b = Math.max(b, 1e-6);
+        return Math.exp(lerp(Math.log(a), Math.log(b), t));
     }
 
-    public static double easeOutCubic(double t) {
+    private static double easeInOutSine(double t) {
+        return -(Math.cos(Math.PI * t) - 1.0) * 0.5;
+    }
+
+    private static double easeOutCubic(double t) {
         return 1.0 - Math.pow(1.0 - t, 3.0);
     }
 
-    public static double easeOutQuad(double t) {
+    private static double easeOutQuad(double t) {
         return 1.0 - (1.0 - t) * (1.0 - t);
     }
 
-    public static double easeOutExpo(double t) {
-        return t == 1.0 ? 1.0 : 1.0 - Math.pow(2.0, -10.0 * t);
+    private static double easeOutExpo(double t) {
+        return t >= 1.0 ? 1.0 : 1.0 - Math.pow(2.0, -10.0 * t);
     }
 }

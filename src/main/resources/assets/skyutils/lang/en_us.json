@@ -18,6 +18,7 @@
   "skyutils.yacl.interpolationType.easeoutcubic": "Ease Out Cubic",
   "skyutils.yacl.interpolationType.easeoutexpo": "Ease Out Expo",
   "skyutils.yacl.interpolationType.easeoutquad": "Ease Out Quad",
+  "skyutils.yacl.interpolationType.instant": "Instant",
   "skyutils.yacl.interpolationType.linear": "Linear",
   "skyutils.yacl.interpolationType.logarithmic": "Logarithmic",
   "skyutils.yacl.name": "SkyUtils",

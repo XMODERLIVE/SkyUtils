@@ -39,7 +39,7 @@ public class modConfig {
     public static double pumpkinOverlayOpacity = 0;
 
     @SerialEntry
-    public static boolean skyutilsTitleScreen = true;
+    public static boolean skyutilsTitleScreen = false;
 
     @SerialEntry
     public static double shieldTranslate = 0.23;
@@ -57,7 +57,7 @@ public class modConfig {
     public static Color outlinecolor = new Color(255, 255, 255,255);
 
     @SerialEntry
-    public static boolean IPCEnabled = true;
+    public static boolean IPCEnabled = false;
 
     @SerialEntry
     public static String IPCplayText = "Playing Minecraft Using SkyUtils!";
@@ -87,16 +87,16 @@ public class modConfig {
     public static double decrement = 50.0;
 
     @SerialEntry
-    public static boolean nodarkness  = true;
+    public static boolean nodarkness  = false;
 
     @SerialEntry
-    public static boolean hookDeathScreen = true;
+    public static boolean hookDeathScreen = false;
 
     @SerialEntry
-    public static boolean hookChatScreen = true;
+    public static boolean hookChatScreen = false;
 
     @SerialEntry
-    public static boolean furnaceToolTip = true;
+    public static boolean furnaceToolTip = false;
 
     public static Screen openConfigScreen(Screen parent) {
         return YetAnotherConfigLib.createBuilder()
@@ -141,7 +141,7 @@ public class modConfig {
                         .build())
                 .category(ConfigCategory.createBuilder()
                         .name(Text.translatable(LOCAL_NAMESPACE_PATH + "group.render"))
-                        .group(OptionGroup.<Double>createBuilder()
+                        .group(OptionGroup.createBuilder()
                                 .name(Text.translatable(LOCAL_NAMESPACE_PATH + "group.zoom"))
                                 .collapsed(true)
                                 .option(Option.<Double>createBuilder()
@@ -178,7 +178,7 @@ public class modConfig {
                                 .option(Option.<Boolean>createBuilder()
                                         .name(Text.translatable(LOCAL_NAMESPACE_PATH + "options.gamma.nodarkness"))
                                         .description(OptionDescription.of(Text.translatable(LOCAL_NAMESPACE_PATH + "options.gamma.nodarkness.description")))
-                                        .binding(true, () -> modConfig.nodarkness, newVal -> modConfig.nodarkness = newVal)
+                                        .binding(false, () -> modConfig.nodarkness, newVal -> modConfig.nodarkness = newVal)
                                         .controller((Option<Boolean> opt) -> BooleanControllerBuilder.create(opt)
                                                 .trueFalseFormatter()
                                                 .coloured(true))
@@ -289,7 +289,7 @@ public class modConfig {
                                 .description(OptionDescription.of(Text.translatable(LOCAL_NAMESPACE_PATH + "options.deathcoords.description")))
                                 .option(Option.<Boolean>createBuilder()
                                         .name(Text.translatable(LOCAL_NAMESPACE_PATH + "options.enableoption"))
-                                        .binding(true, () -> modConfig.hookDeathScreen, newVal -> modConfig.hookDeathScreen = newVal)
+                                        .binding(false, () -> modConfig.hookDeathScreen, newVal -> modConfig.hookDeathScreen = newVal)
                                         .controller((Option<Boolean> opt) -> BooleanControllerBuilder.create(opt)
                                                 .trueFalseFormatter()
                                                 .coloured(true))
@@ -301,7 +301,7 @@ public class modConfig {
                                 .description(OptionDescription.of(Text.translatable(LOCAL_NAMESPACE_PATH + "options.chatcoords.description")))
                                 .option(Option.<Boolean>createBuilder()
                                         .name(Text.translatable(LOCAL_NAMESPACE_PATH + "options.enableoption"))
-                                        .binding(true, () -> modConfig.hookChatScreen, newVal -> modConfig.hookChatScreen = newVal)
+                                        .binding(false, () -> modConfig.hookChatScreen, newVal -> modConfig.hookChatScreen = newVal)
                                         .controller((Option<Boolean> opt) -> BooleanControllerBuilder.create(opt)
                                                 .trueFalseFormatter()
                                                 .coloured(true))
@@ -313,7 +313,7 @@ public class modConfig {
                                 .description(OptionDescription.of(Text.translatable(LOCAL_NAMESPACE_PATH + "options.tooltip.furnace.description")))
                                 .option(Option.<Boolean>createBuilder()
                                         .name(Text.translatable(LOCAL_NAMESPACE_PATH + "options.enableoption"))
-                                        .binding(true, () -> modConfig.furnaceToolTip, newVal -> modConfig.furnaceToolTip = newVal)
+                                        .binding(false, () -> modConfig.furnaceToolTip, newVal -> modConfig.furnaceToolTip = newVal)
                                         .controller((Option<Boolean> opt) -> BooleanControllerBuilder.create(opt)
                                                 .trueFalseFormatter()
                                                 .coloured(true))
@@ -327,7 +327,7 @@ public class modConfig {
                         .option(Option.<Boolean>createBuilder()
                                 .name(Text.translatable(LOCAL_NAMESPACE_PATH + "options.ipc.name"))
                                 .description(OptionDescription.of(Text.translatable(LOCAL_NAMESPACE_PATH + "options.ipc.description")))
-                                .binding(true, () -> modConfig.IPCEnabled, newVal -> modConfig.IPCEnabled = newVal)
+                                .binding(false, () -> modConfig.IPCEnabled, newVal -> modConfig.IPCEnabled = newVal)
                                 .controller((Option<Boolean> opt) -> BooleanControllerBuilder.create(opt).trueFalseFormatter().coloured(true))
                                 .build())
                         .option(Option.<String>createBuilder().

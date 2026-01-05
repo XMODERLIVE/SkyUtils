@@ -65,6 +65,10 @@ public class zoomHelper {
 
         targetLevel = baseZoom * scrollZoom;
 
-        currentLevel = math.interpolate(currentLevel, targetLevel, lerpSpeed, dt, modConfig.interpolationType);
+        if (modConfig.interpolationType != InterpolationMode.INSTANT){
+            currentLevel = math.interpolate(currentLevel, targetLevel, lerpSpeed, dt, modConfig.interpolationType);
+        } else {
+            currentLevel = targetLevel;
+        }
     }
 }
