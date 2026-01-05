@@ -1,13 +1,10 @@
 package net.notnightsky.skyutils.gui.titleMenu;
 
 import com.terraformersmc.modmenu.gui.ModsScreen;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.gui.CubeMapRenderer;
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.gui.DrawContext;
-import net.minecraft.client.gui.RotatingCubeMapRenderer;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.screen.multiplayer.MultiplayerScreen;
-import net.minecraft.client.gui.screen.option.CreditsAndAttributionScreen;
 import net.minecraft.client.gui.screen.option.OptionsScreen;
 import net.minecraft.client.gui.screen.world.SelectWorldScreen;
 import net.minecraft.client.realms.gui.screen.RealmsMainScreen;
@@ -65,6 +62,8 @@ public class screen extends Screen {
             if (client != null) {
                 client.scheduleStop();
             }}));
+
+        if(FabricLoader.getInstance().isModLoaded("modmenu")){
         //                                                        btn size
         //                                                           +
         //ModMenu                                   stop btn x     padding
@@ -72,6 +71,7 @@ public class screen extends Screen {
             if (client != null) {
                 client.setScreen(new ModsScreen(this));
             }}));
+        }
     }
 
     @Override
